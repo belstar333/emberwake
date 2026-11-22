@@ -44,6 +44,17 @@ h1 span{display:block}h1 span:first-child{color:#f4eee1}h1 span+span{color:var(-
 @media(max-height:530px) and (min-aspect-ratio:1/1){:root{--pad:4vw}.mast{height:41px}.brand{font-size:11px}.mast .tools button{height:27px}.brand small{font-size:6px}.wingmark{transform:scale(.75) skewX(-25deg);transform-origin:left center;width:25px}.title-block{padding:6px 0}.title-block h1{font-size:clamp(46px,12.3vh,65px);margin:.16em 0}.eyebrow{font-size:8px}.korean-title{font-size:10px}.intro{font-size:10px;margin:4px 0 7px}.launch,.secondary{min-height:33px;font-size:12px}.route{margin-bottom:9px}.route-card{min-height:42px;padding:5px 9px}.route-card small{font-size:7px}.route-card strong{font-size:11px;margin-top:1px}.route-head{font-size:9px;padding-bottom:5px}.flight-top{height:36px}.flight-bottom{height:40px}.flight-top small{font-size:8px}.flight-top .tool{height:25px}.flight-bottom .slot{width:27px}.field-hint{font-size:8px}#radar{width:55px}#dialog{padding:15px 22px}.dialog-head h2{font-size:23px}.card-grid{margin-top:8px}.choice{min-height:145px;padding:8px}.choice>.glyph{width:32px;height:32px;margin:3px 0}.choice strong{font-size:15px}.choice p{font-size:10px;margin:3px 0}.choice em{font-size:9px;padding-top:4px}.draft-foot{margin-top:7px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
 .parts-list{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}.parts-list summary{cursor:pointer;font-size:12px;font-weight:700;color:#e3d5c4}.parts-list p{font-size:12px;color:#bbcbcc;margin:8px 0}.parts-list b{margin-right:7px}
+.guide-section{display:flex;align-items:baseline;gap:12px;margin:20px 0 9px;font-size:16px}.guide-section small{color:#a2b3b6;font:500 11px var(--type)}
+.fusion-item button{margin-top:6px;padding:5px 12px;border:1px solid #667d82;background:transparent;color:var(--c);font:650 11px var(--type)}
+.fusion-item button[aria-pressed=true]{background:#263e41;border-color:var(--c)}.fusion-item button:disabled{opacity:.58}.fusion-item .recipe{color:#bdc9c6}.fusion-item .ready{color:#8af3c4}
+.supply-guide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.supply-guide>div{padding:9px;border:1px solid var(--line);background:#152229}
+.supply-guide .glyph{width:30px;margin-bottom:5px}.supply-guide b,.supply-guide small{display:block}.supply-guide b{font-size:12px}.supply-guide small{font:11px/1.5 var(--type);color:#b9c8c8;margin-top:3px}
+#radar-box span b{color:#ffd6ab;font:700 10px var(--mono);letter-spacing:0}
+#radar-box span{display:table;margin:0 auto 2px;padding:2px 5px;background:#08171bdc;border-radius:2px}
+#supply-read{position:absolute;top:12px;right:14px;border-right:2px solid var(--supply,#9cecd6);background:#0b191ed6;color:var(--supply,#9cecd6);padding:5px 9px;font:650 11px var(--type);pointer-events:none}
+.fusion-meter{align-self:center;color:#ffd699;font-size:10px;white-space:nowrap}.maneuvers{display:none}
+@media(pointer:coarse){.maneuvers{position:absolute;bottom:12px;left:13px;display:flex;gap:6px}.maneuvers .touch-boost{position:static;min-height:39px;touch-action:none;user-select:none}.maneuvers #touch-brake{border-color:#baa784;color:#ffdcaa}.maneuvers #touch-brake.held{background:#62513c}}
+@media(max-width:580px){#supply-read{top:auto;bottom:58px;left:12px;right:auto;font-size:10px}.fusion-meter{position:absolute;bottom:2px;left:50%;font-size:8px}#loadout{gap:2px}.flight-bottom{gap:6px}.slot{width:clamp(17px,5.9vw,24px)}.tabs .tab{padding-inline:6px}}
 @media(max-aspect-ratio:1/1){.title-block h1{font-size:clamp(48px,min(20.5vw,12vh),112px)}.cover-art{inset:0 0 auto;height:71%;background-size:cover;background-position:65% center;mask-image:linear-gradient(to bottom,#000 0%,#000 60%,transparent 100%)}}
 
 </style>
@@ -63,7 +74,7 @@ h1 span{display:block}h1 span:first-child{color:#f4eee1}h1 span+span{color:var(-
       <div class="eyebrow"><span class="pilot-light"></span> 360° ORBITAL SHOOTER</div>
       <h1 aria-label="EMBERWAKE"><span>EMBER</span><span>WAKE</span></h1>
       <div class="korean-title">엠버웨이크</div>
-      <p class="intro">적의 꼬리를 잡고, 결정으로 무장을 진화시켜<br class="narrow-only"> 세 궤도의 수호기를 격추하세요.</p>
+      <p class="intro">편대 사이로 파고들어 경험 결정을 모으세요.<br>진화 무기를 결합해 세 궤도의 수호기를 격추하세요.</p>
       <div class="launch-row">
         <button id="launch" class="launch"><span class="play-icon"></span>출격하기 <kbd>ENTER ↵</kbd></button>
         <button id="open-guide" class="secondary"><span class="book-icon"></span>비행 도감</button>
@@ -91,10 +102,11 @@ h1 span{display:block}h1 span:first-child{color:#f4eee1}h1 span+span{color:var(-
       <div id="boss-bar" hidden><div><small>대형 신호</small><strong id="boss-name"></strong></div><i><b id="boss-fill"></b></i></div>
       <div id="notice" role="status" aria-live="polite" hidden><small></small><strong></strong><span></span></div>
       <div id="hit-flash"></div>
-      <div id="radar-box"><span>전술 레이더</span><canvas id="radar" width="188" height="188" aria-label="적 위치 레이더"></canvas></div>
-      <div class="field-hint" id="field-hint">WASD / 방향키로 기수 조종 <i></i> 사격 자동</div>
+      <div id="radar-box"><span>레이더 접촉 <b id="contact-count">0</b></span><canvas id="radar" width="188" height="188" aria-label="적과 보급품 위치 레이더"></canvas></div>
+      <div id="supply-read" role="status" hidden></div>
+      <div class="field-hint" id="field-hint">WASD / 방향키 조종 <i></i> Shift 감속 선회 <i></i> Space 부스트</div>
       <div id="stick" hidden><i></i></div>
-      <button class="touch-boost" id="touch-boost" aria-label="기동 부스트">부스트</button>
+      <div class="maneuvers"><button class="touch-boost" id="touch-brake" aria-label="감속 선회 누르기">감속</button><button class="touch-boost" id="touch-boost" aria-label="기동 부스트">부스트</button></div>
     </div>
     <footer class="flight-bottom">
       <div class="hull-block"><div class="stat-title"><span>내구도</span><b id="hull-text">100</b></div><div class="meter hull"><i id="hull-fill"></i></div></div>
@@ -4236,13 +4248,46 @@ window.Ember = (() => {
     arc: { name: '아크 방전기', en: 'ARC RELAY', icon: 'arc', color: '#bda0ff', text: '기체 주변의 적 사이로 전류를 흘려보낸다.', growth: '연쇄 횟수와 첫 표적 탐색 거리 증가.', part: 'coil', evo: '폭풍 연결망', evolved: '멀리 떨어진 표적까지 굵은 번개가 여러 차례 이어진다.' },
     blade: { name: '궤도 절단기', en: 'ORBIT CUTTER', icon: 'blade', color: '#7ef5be', text: '기체 주위를 도는 칼날이 접근하는 적을 벤다.', growth: '칼날 수와 접촉 피해가 증가한다.', part: 'magnet', evo: '극광 톱니고리', evolved: '넓은 궤도를 도는 칼날이 적을 베고 닿은 적탄을 분해한다.' },
     fan: { name: '분광 산탄포', en: 'PRISM ARRAY', icon: 'fan', color: '#ffd476', text: '전방 부채꼴 범위에 결정탄을 흩뿌린다.', growth: '부채꼴의 탄 수와 탄속이 증가한다.', part: 'lens', evo: '만화경 포화', evolved: '여러 방향으로 관통 결정탄을 흩뿌려 후방까지 덮는다.' },
-    mine: { name: '중력 기뢰', en: 'GRAVITY MINE', icon: 'mine', color: '#f39cda', text: '비행 궤적에 남긴 기뢰가 적을 감지하면 폭발한다.', growth: '설치 간격이 줄고 폭발 반경이 커진다.', part: 'coil', evo: '사건의 지평', evolved: '폭발 자리에 특이점이 열려 주변의 적을 끌어당기며 피해를 준다.' }
+    mine: { name: '중력 기뢰', en: 'GRAVITY MINE', icon: 'mine', color: '#f39cda', text: '비행 궤적에 남긴 기뢰가 적을 감지하면 폭발한다.', growth: '설치 간격이 줄고 폭발 반경이 커진다.', part: 'coil', evo: '사건의 지평', evolved: '폭발 자리에 특이점이 열려 주변의 적을 끌어당기며 피해를 준다.' },
+    boomerang: {name:'귀환익',en:'RETURN WING',icon:'boomerang',color:'#9be6ff',text:'초승달형 날개가 적을 가르고 기체로 되돌아온다.',growth:'왕복 관통 피해와 날개 수가 증가한다.',part:'vector',evo:'쌍월 회수익',evolved:'세 갈래 회수익이 멀리 뻗었다가 귀환하며 같은 적을 다시 벤다.'},
+    sonic: {name:'공명 파동기',en:'SONIC DRIVE',icon:'sonic',color:'#ffe49b',text:'기체를 중심으로 퍼지는 충격파가 적을 밀어낸다.',growth:'파동 반경과 충격 피해가 증가한다.',part:'capacitor',evo:'항성 맥동',evolved:'연속으로 퍼지는 두 겹의 충격파가 포위망을 벌린다.'},
+    drone: {name:'윙맨 포드',en:'WINGMAN POD',icon:'drone',color:'#82f1dc',text:'편대기가 날개 옆에서 별도 표적을 조준해 사격한다.',growth:'편대 수와 지원 사격의 위력이 증가한다.',part:'reactor',evo:'성단 호위대',evolved:'세 편대기가 관통 쌍발포로 교차 사격한다.'},
+    frost: {name:'냉각 작살포',en:'FROST SPIKE',icon:'frost',color:'#9ec8ff',text:'근처의 적을 꿰뚫는 냉각 결정이 이동을 늦춘다.',growth:'관통 횟수와 냉각 지속 시간이 증가한다.',part:'magnet',evo:'서리 성좌',evolved:'작살이 명중하면 주변의 적까지 냉각되어 느려진다.'}
   };
   const parts = {
     lens: { name: '집속 렌즈', en: 'FOCUS LENS', icon: 'lens', color: '#ffd476', text: '레벨마다 모든 무기의 피해량이 12% 증가한다.' },
     reactor: { name: '과급 반응로', en: 'OVERDRIVE', icon: 'reactor', color: '#ff9c60', text: '레벨마다 무기의 발사 간격이 8% 줄어든다.' },
     coil: { name: '도전 코일', en: 'ION COIL', icon: 'coil', color: '#bda0ff', text: '레벨마다 기동 부스트 재충전이 0.45초 빨라진다.' },
-    magnet: { name: '견인 자석', en: 'TRACTOR CORE', icon: 'magnet', color: '#7ef5be', text: '레벨마다 경험 결정의 견인 반경이 7만큼 넓어진다.' }
+    magnet: { name: '견인 자석', en: 'TRACTOR CORE', icon: 'magnet', color: '#7ef5be', text: '레벨마다 경험 결정의 견인 반경이 7만큼 넓어진다.' },
+    vector: {name:'벡터 추진기',en:'VECTOR DRIVE',icon:'vector',color:'#ffbd7b',text:'레벨마다 순항 속도가 10%, 선회 속도가 4% 증가한다.'},
+    capacitor: {name:'충격 축전기',en:'CAPACITOR',icon:'capacitor',color:'#f7de8d',text:'레벨마다 파동, 기뢰, 유도탄 폭발의 반경이 12% 커진다.'}
+  };
+  const fusions={
+    sunrail:{name:'태양 횡단포',tier:2,period:2.5,needs:['pulse','missile'],color:'#ffbf69',icon:'pulse',text:'두 줄의 중광선이 표적을 따라 편대를 관통한다.'},
+    maelstrom:{name:'폭풍의 눈',tier:2,period:3.2,needs:['arc','fan'],color:'#c4a6ff',icon:'arc',text:'기체 주변의 파동을 따라 번개가 적 사이를 건너뛴다.'},
+    bulwark:{name:'이동 요새',tier:2,period:3.1,needs:['blade','mine'],color:'#98ffc0',icon:'blade',text:'기체를 따라 퍼지는 방벽이 적을 밀고 적탄을 지운다.'},
+    twinwake:{name:'쌍월 편대',tier:2,period:2.4,needs:['boomerang','drone'],color:'#8cfdff',icon:'boomerang',text:'양쪽 편대 위치에서 추가 회수익을 사출해 양옆을 벤다.'},
+    whiteout:{name:'백야 전선',tier:2,period:3.4,needs:['sonic','frost'],color:'#b4dcff',icon:'frost',text:'넓게 퍼지는 서리 파동이 닿은 적을 냉각하고 밀어낸다.'},
+    relay:{name:'극점 도약',tier:2,period:2.6,needs:['drone','arc'],color:'#99c6ff',icon:'drone',text:'양 날개에서 각각 번개 사슬을 방출한다.'},
+    tidal:{name:'조석 붕괴',tier:2,period:3.8,needs:['mine','sonic'],color:'#efa0ef',icon:'mine',text:'떨어진 두 표적 아래에 중력 우물이 열려 주변 편대를 끌어모은다.'},
+    dawn:{name:'새벽의 항로',tier:3,period:3.9,needs:['sunrail','twinwake'],color:'#ffdc91',icon:'solar',text:'기수 앞을 다섯 줄의 광창으로 쓸고 귀환익 편대를 내보낸다.'},
+    aurora:{name:'극야의 천둥',tier:3,period:4.4,needs:['maelstrom','whiteout'],color:'#b7dcff',icon:'storm',text:'세 겹의 서리 전선이 퍼지는 동안 번개가 포위망을 가른다.'},
+    horizon:{name:'지평선 방벽',tier:3,period:4.2,needs:['bulwark','relay'],color:'#9ff8ce',icon:'aegis',text:'기체와 함께 움직이는 연속 방벽이 적탄을 지우며 양옆으로 번개를 보낸다.'},
+    solstice:{name:'동지의 별',tier:3,period:4.6,needs:['tidal','whiteout'],color:'#a5ebff',icon:'frost',text:'냉각 중력장이 편대를 끌어들인 뒤 서리 충격파가 바깥으로 터진다.'}
+  };
+  function recipePath(id) {
+    const bases=new Set(),combos=new Set();
+    function visit(key) {
+      if(weapons[key]) {bases.add(key);return;}
+      if(!fusions[key] || combos.has(key)) return;
+      combos.add(key);fusions[key].needs.forEach(visit);
+    }
+    visit(id);return {bases,combos};
+  }
+  const supplies={
+    repair:{name:'수리팩',color:'#85ffad',text:'내구도 22 회복'},
+    magnet:{name:'자력 캡슐',color:'#7acbff',text:'전장의 경험 결정 전체 견인'},
+    fuel:{name:'추진 연료',color:'#ffc478',text:'8초간 순항 속도 25% 증가'}
   };
   const forms = {
     solar: { name: '솔라 랜서', en: 'SOLAR LANCER', base: 'pulse', partner: 'missile', color: '#ffc458', icon: 'solar', text: '광창 전용 장포신 전개. 펄스 계열 발사 간격이 30% 줄어든다.' },
@@ -4287,7 +4332,7 @@ window.Ember = (() => {
   const angleDelta=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
   const turn=(a,b,step)=>a+clamp(angleDelta(a,b),-step,step);
   const timeText=t=>{const sec=Math.floor(t+1e-7);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');};
-  return {weapons,parts,forms,sectors,species,variants,clamp,angleDelta,turn,timeText,TAU:Math.PI*2,BOSS_INTERVAL:300};
+  return {weapons,parts,forms,fusions,recipePath,supplies,sectors,species,variants,clamp,angleDelta,turn,timeText,TAU:Math.PI*2,BOSS_INTERVAL:300,ENEMY_CAP:360,WEAPON_SLOTS:5,PART_SLOTS:4};
 })();
 
 </script>
@@ -4298,32 +4343,59 @@ window.Ember = (() => {
   const {clamp,turn,angleDelta,TAU,weapons,parts,forms,species,variants}=E;
   const dist2=(a,b)=>(a.x-b.x)**2+(a.y-b.y)**2;
   const bearing=(a,b)=>Math.atan2(b.y-a.y,b.x-a.x);
-  const need=level=>Math.round(7+level*3.8+Math.pow(level,1.18)*1.9+Math.max(0,level-20)**1.42*2.7);
+  const need=level=>Math.round(7+level*3.8+level**1.18*1.9+Math.max(0,level-10)**1.82*3);
   const inRay=(e,x,y,a,length,width)=>{
     const dx=e.x-x,dy=e.y-y,c=Math.cos(a),s=Math.sin(a);
     const along=dx*c+dy*s;
     return along>=0 && along<=length && Math.abs(dy*c-dx*s)<=width;
   };
+  // Short-range collisions and formation spacing share a grid. Bosses have larger hulls.
+  class NeighbourGrid {
+    constructor(){this.cells=new Map();this.buckets=[];this.bosses=[];this.scratch=[];}
+    rebuild(enemies) {
+      this.cells.clear();this.bosses.length=0;let used=0;
+      for(const e of enemies) {
+        if(e.dead) continue;
+        if(e.boss){this.bosses.push(e);continue;}
+        const key=Math.floor(e.x/5)*1048576+Math.floor(e.y/5);
+        let bucket=this.cells.get(key);
+        if(!bucket){bucket=this.buckets[used]||(this.buckets[used]=[]);used++;bucket.length=0;this.cells.set(key,bucket);}
+        bucket.push(e);
+      }
+    }
+    near(x,y,r,includeBoss=false) {
+      const out=this.scratch;out.length=0;
+      const left=Math.floor((x-r)/5),right=Math.floor((x+r)/5),bottom=Math.floor((y-r)/5),top=Math.floor((y+r)/5);
+      for(let ix=left;ix<=right;ix++)for(let iy=bottom;iy<=top;iy++){
+        const bin=this.cells.get(ix*1048576+iy);if(bin)for(const e of bin)out.push(e);
+      }
+      if(includeBoss)for(const e of this.bosses)out.push(e);
+      return out;
+    }
+  }
   class Flight {
     constructor(random=Math.random) {
       this.random=random;
-      this.player={x:0,y:0,a:0,bank:0,speed:10.5,hp:100,maxHp:100,inv:1.5,boost:0,boostCd:0,shield:false,shieldCd:0};
+      this.player={x:0,y:0,a:0,yaw:0,bank:0,vx:9.6,vy:0,speed:9.6,hp:100,maxHp:100,inv:1.5,boost:0,boostCd:0,shield:false,shieldCd:0,fuel:0};
       this.cam={x:3,y:0};
       this.halfW=59; this.halfH=32;
       this.mode='fly'; this.elapsed=0; this.level=1; this.xp=0; this.need=need(1);
       this.kills=0; this.score=0; this.sector=0; this.nextBoss=0; this.bossKills=0;
       this.weapons={pulse:1}; this.parts={}; this.evolved=new Set();
+      this.fusions=new Set();this.target='';this.pulses=[];this.drones=[];this.grid=new NeighbourGrid();this.tick=0;
+      this.dropDue={repair:10,magnet:18,fuel:32};
       this.forms=[]; this.form=''; this.cooldowns={}; this.rerolls=2; this.choices=[];
       this.enemies=[]; this.shots=[]; this.hostile=[]; this.gems=[]; this.effects=[];
       this.hazards=[]; this.wells=[]; this.blades=[]; this.events=[];
-      this.nextId=1; this.wave=0; this.waveClock=1.9; this.warning=-1;
-      this.nextSurge=40;this.surge=null;
-      this.spawnWave(true);
+      this.nextId=1; this.wave=0; this.waveClock=.65; this.warning=-1;
+      this.nextSurge=32;this.surge=null;
+      for(const [index,angle] of [0,1.6,3.2,-1.56].entries())
+        this.spawnWave(true,{angle,count:7,definition:species[index%2]});
     }
     number(a,b) { return a+(b-a)*this.random(); }
     pick(items) { return items[Math.floor(this.random()*items.length)]; }
     event(kind,detail={}) {
-      if(this.events.length<100) this.events.push({kind,...detail});
+      if(this.events.length<120 || !['strike','kill','gem','gun'].includes(kind)) this.events.push({kind,...detail});
     }
     effect(type,data,life) {
       if(this.effects.length<240) this.effects.push({type,...data,life,maxLife:life,seed:this.random()*100});
@@ -4342,7 +4414,7 @@ window.Ember = (() => {
     boostPeriod() { return 3.7-(this.parts.coil||0)*0.45; }
     step(dt,input={}) {
       if(this.mode!=='fly') return;
-      this.elapsed+=dt;
+      this.elapsed+=dt;this.tick++;this.impactBudget=5;
       this.fly(dt,input);
       if(this.nextBoss<3) {
         const at=(this.nextBoss+1)*E.BOSS_INTERVAL;
@@ -4353,13 +4425,19 @@ window.Ember = (() => {
       }
       this.waveClock-=dt;
       if(this.waveClock<=0) {
-        this.spawnWave(false);
         const bossPresent=this.enemies.some(e=>e.boss && !e.dead);
-        this.waveClock=(2.65-1.66*Math.min(1,this.elapsed/740))*(bossPresent?1.65:1)*this.number(.84,1.13);
+        const density=this.pressure(),target=70+Math.floor(278*density);
+        if(this.enemies.length<target) this.spawnWave(false);
+        if(this.enemies.length<target*.66 && this.elapsed>8) this.spawnWave(false);
+        this.waveClock=(1.05-.52*density)*(bossPresent?1.22:1)*this.number(.90,1.10);
       }
       this.updateSurge(dt);
+      this.grid.rebuild(this.enemies);
       this.moveEnemies(dt);
+      this.positionDrones();
       this.fireWeapons(dt);
+      this.fireFusions(dt);
+      this.updatePulses(dt);
       this.moveShots(dt);
       this.updateBlades(dt);
       this.updateWells(dt);
@@ -4371,16 +4449,22 @@ window.Ember = (() => {
       if(this.mode==='fly' && this.xp>=this.need) this.levelUp();
     }
     fly(dt,input) {
-      const p=this.player,previous=p.a;
-      const rate=this.form==='storm'?4.75:3.65;
-      if(input.spin) p.a+=input.spin*rate*dt;
-      else if(Number.isFinite(input.angle)) p.a=turn(p.a,input.angle,rate*dt);
-      p.a=Math.atan2(Math.sin(p.a),Math.cos(p.a));
-      const bank=clamp(angleDelta(previous,p.a)/dt/rate,-1,1);
-      p.bank+=(bank-p.bank)*Math.min(1,dt*9);
+      const p=this.player,thrust=this.parts.vector||0,brake=!!input.brake && p.boost<=0;
+      const rate=4.72*(this.form==='storm'?1.30:1)*(1+thrust*.04)*(brake?1.22:1);
+      const hasAim=Number.isFinite(input.angle),error=hasAim?angleDelta(p.a,input.angle):0;
+      const desired=input.spin?input.spin*rate:clamp(error*11,-rate,rate);
+      p.yaw+=(desired-p.yaw)*(1-Math.exp(-dt*20));
+      let step=p.yaw*dt;
+      if(!input.spin && hasAim && step*error>=0 && Math.abs(step)>=Math.abs(error)){step=error;p.yaw=0;}
+      p.a=Math.atan2(Math.sin(p.a+step),Math.cos(p.a+step));
+      p.bank+=(clamp(p.yaw/rate,-1,1)-p.bank)*(1-Math.exp(-dt*12));
       p.boost=Math.max(0,p.boost-dt); p.inv=Math.max(0,p.inv-dt); p.boostCd=Math.max(0,p.boostCd-dt);
-      p.speed+=(p.boost>0?34-p.speed:10.5-p.speed)*Math.min(1,dt*12);
-      p.x+=Math.cos(p.a)*p.speed*dt; p.y+=Math.sin(p.a)*p.speed*dt;
+      p.fuel=Math.max(0,p.fuel-dt);
+      const cruise=9.6*(1+.10*thrust)*(p.fuel>0?1.25:1);
+      const speed=p.boost>0?27.5:cruise*(brake?.62:1)*(1-.13*Math.abs(p.bank));
+      const grip=1-Math.exp(-dt*(p.boost>0?20:brake?15:10.8));
+      p.vx+=(Math.cos(p.a)*speed-p.vx)*grip;p.vy+=(Math.sin(p.a)*speed-p.vy)*grip;
+      p.speed=Math.hypot(p.vx,p.vy);p.x+=p.vx*dt;p.y+=p.vy*dt;
       const look=3.1,follow=1-Math.exp(-dt*5);
       this.cam.x+=(p.x+Math.cos(p.a)*look-this.cam.x)*follow;
       this.cam.y+=(p.y+Math.sin(p.a)*look-this.cam.y)*follow;
@@ -4389,34 +4473,35 @@ window.Ember = (() => {
         if(p.shieldCd<=0) {p.shield=true; this.pulseRing(p.x,p.y,'#77f8b8',3.6);}
       }
     }
+    pressure(){return .38*Math.min(1,this.elapsed/62)+.62*Math.min(1,this.elapsed/600);}
     spawnWave(opening,formation=null) {
-      const p=this.player,difficulty=Math.min(1,this.elapsed/820);
+      const p=this.player,difficulty=this.pressure();
       const pool=species.filter(s=>s.at<=this.elapsed);
       const definition=formation?.definition||(opening?species[0]:(this.wave%4===1?pool[pool.length-1]:this.pick(pool)));
       const a=formation?.angle??(opening?p.a:(this.wave%4===1?p.a+this.number(-.48,.48):this.wave*2.39996+this.number(-.48,.48)));
       const c=Math.cos(a),s=Math.sin(a);
-      const edge=Math.min((this.halfW+3)/Math.max(.015,Math.abs(c)),(this.halfH+3)/Math.max(.015,Math.abs(s)));
-      const distance=opening?21:edge;
-      const count=formation?.count??(opening?4:Math.min(11,2+Math.floor(difficulty*6)+Math.floor(this.random()*3)));
+      const edge=Math.min((this.halfW+1)/Math.max(.015,Math.abs(c)),(this.halfH+1)/Math.max(.015,Math.abs(s)));
+      const distance=opening?23:edge;
+      const count=formation?.count??(9+Math.floor(difficulty*15)+Math.floor(this.random()*3));
       const variantCount=clamp(1+Math.floor((this.elapsed+36)/88),1,4);
       const color=formation?.variant??Math.floor(this.random()*variantCount);
       const pattern=formation?.pattern??this.wave%5;
-      let wingmate=null;
-      for(let i=0;i<count && this.enemies.length<140;i++) {
-        const side=i-(count-1)/2;
-        let cross=side*3.8,depth=Math.abs(side)*2;
-        if(opening) {cross=[0,2.9,-3.8,0][i];depth=i*3.5;}
-        else if(pattern===1) {cross=Math.sin(i*.9)*3.6;depth=i*3.3;}
-        else if(pattern===2) {cross=side*4.4;depth=(i%2)*3.2;}
-        else if(pattern===3) {cross=Math.sin(i/count*TAU)*5;depth=Math.cos(i/count*TAU)*5;}
-        else if(pattern===4) {cross=side*3.2;depth=side*2.0;}
-        const x=p.x+c*(distance+depth)-s*cross,y=p.y+s*(distance+depth)+c*cross;
+      const cols=opening?3:Math.min(7,Math.ceil(count/2)),origin=opening?p:this.cam;
+      for(let i=0;i<count && this.enemies.length<E.ENEMY_CAP;i++) {
+        const row=Math.floor(i/cols),side=i%cols-(cols-1)/2,spacing=2.1+definition.size;
+        let cross=(side+row%2*.42)*spacing,depth=row*spacing;
+        if(pattern===0 || pattern===2) {cross+=Math.sign(side)*2.2;depth+=Math.abs(side)*.78;}
+        if(pattern===1) cross+=Math.sin(row*1.45)*3;
+        if(pattern===3) depth+=Math.cos(side*.82)*2.25;
+        if(pattern===4) depth+=side*1.09;
+        if(opening && i===1)cross=0;
+        const x=origin.x+c*(distance+depth)-s*cross,y=origin.y+s*(distance+depth)+c*cross;
         const hp=definition.hp*variants[color].armor*(1+.65*difficulty);
         this.enemies.push({id:this.nextId++,def:definition,variant:color,x,y,a:a+Math.PI,
           hp,maxHp:hp,r:definition.size,age:0,phase:i*.65+this.wave,turnSeed:this.number(.8,1.2),
-          fire:this.number(2,5.5)+(opening?3:0),hit:0,bladeHit:0,dead:false,
-          laneX:-s*cross,laneY:c*cross,entry:a+Math.PI,wingmate});
-        wingmate=this.enemies[this.enemies.length-1];
+          shooter:!opening && i===Math.floor(cols/2) && this.wave%3===0,
+          fire:this.number(3,6),hit:0,bladeHit:0,contact:0,chill:0,stun:0,kx:0,ky:0,sx:0,sy:0,dead:false,
+          laneX:-s*cross,laneY:c*cross,entry:a+Math.PI});
       }
       this.wave++;
     }
@@ -4428,7 +4513,7 @@ window.Ember = (() => {
           const candidates=species.filter(s=>s.at<=this.elapsed && ['weave','sweep','dive'].includes(s.motion));
           this.surge={definition:this.pick(candidates),angle:this.player.a+this.number(-1.6,1.6),
             variant:Math.floor(this.number(0,Math.min(4,1+Math.floor(this.elapsed/88)))),
-            remaining:3+Math.floor(Math.min(3,this.elapsed/210)),count:4+Math.floor(Math.min(4,this.elapsed/195)),clock:0,pattern:0};
+            remaining:4+Math.floor(Math.min(3,this.elapsed/210)),count:9+Math.floor(Math.min(7,this.elapsed/110)),clock:0,pattern:0};
           this.event('surge',{id:this.surge.definition.id});
         }
       }
@@ -4453,26 +4538,38 @@ window.Ember = (() => {
         e.age+=dt; e.hit=Math.max(0,e.hit-dt); e.bladeHit=Math.max(0,e.bladeHit-dt);
         if(e.boss) {this.moveBoss(e,dt);continue;}
         const d2=dist2(p,e),d=Math.sqrt(d2),def=e.def;
-        if((d>Math.max(this.halfW*1.7,112) && e.age>7) || e.age>64) {e.dead=true;continue;}
+        if((e.age>4 && (Math.abs(e.x-this.cam.x)>this.halfW+23 || Math.abs(e.y-this.cam.y)>this.halfH+21)) || e.age>64) {e.dead=true;continue;}
         const aim=Math.atan2(p.y+e.laneY*.48-e.y,p.x+e.laneX*.48-e.x);
-        let target=aim,speed=def.speed,rate=1.30;
-        if(def.motion==='sweep') {target=e.age<2.4?e.entry:aim+.36*Math.sin(e.phase+e.age*.9); rate=.78;}
-        if(def.motion==='weave') {target=aim+.78*Math.sin(e.age*1.65+e.phase);rate=2.8;}
-        if(def.motion==='orbit') {target=aim+(e.id%2?1:-1)*(d<20?1.62:.52);rate=2;}
-        if(def.motion==='dive') {speed*=Math.sin(e.age*1.1+e.phase)>.2?1.52:.78;rate=d<13?.36:2.5;}
+        let target=aim,speed=def.speed*(.45+.035*pressure),rate=1.13;
+        if(def.motion==='sweep') {target=e.age<1.2?e.entry:aim+.25*Math.sin(e.phase+e.age*.85); rate=1.02;}
+        if(def.motion==='weave') {target=aim+.56*Math.sin(e.age*1.25+e.phase);rate=2.1;}
+        if(def.motion==='orbit') {target=aim+(e.id%2?1:-1)*(d<14?.96:.36);rate=1.55;}
+        if(def.motion==='dive') {speed*=Math.sin(e.age*.95+e.phase)>.45?1.14:.84;rate=d<10?.64:1.9;}
+        e.chill=Math.max(0,e.chill-dt);e.stun=Math.max(0,e.stun-dt);e.contact=Math.max(0,e.contact-dt);
+        speed=Math.min(8.4,speed)*(e.chill>0?.48:1)*(e.stun>0?.16:1);
         e.a=turn(e.a,target,rate*e.turnSeed*dt);
-        e.x+=Math.cos(e.a)*speed*dt; e.y+=Math.sin(e.a)*speed*dt;
-        const mate=e.wingmate;
-        if(mate && !mate.dead) {
-          const dx=e.x-mate.x,dy=e.y-mate.y,gap=Math.hypot(dx,dy),separation=(e.r+mate.r)*.90;
-          if(gap>.01 && gap<separation) {const push=(separation-gap)*Math.min(1,dt*8)/gap;e.x+=dx*push;e.y+=dy*push;}
+        if((this.tick+e.id)%5===0) {
+          let sx=0,sy=0;
+          for(const other of this.grid.near(e.x,e.y,3.6)){
+            if(e===other || other.dead)continue;
+            const dx=e.x-other.x,dy=e.y-other.y,sq=dx*dx+dy*dy,gap=(e.r+other.r)*.88;
+            if(sq<.0001 || sq>=gap*gap)continue;
+            const len=Math.sqrt(sq),push=(gap-len)*3.2/len;sx+=dx*push;sy+=dy*push;
+          }
+          e.sx=clamp(sx,-3.6,3.6);e.sy=clamp(sy,-3.6,3.6);
         }
+        e.x+=(Math.cos(e.a)*speed+e.sx+e.kx)*dt;e.y+=(Math.sin(e.a)*speed+e.sy+e.ky)*dt;
+        e.kx*=Math.exp(-dt*10);e.ky*=Math.exp(-dt*10);
         e.fire-=dt;
-        if(e.fire<=0 && d<Math.min(56,this.halfW+8) && d>5 && this.elapsed>4) {
+        if(e.shooter && e.fire<=0 && d<42 && d>9 && this.elapsed>18) {
           this.enemyVolley(e,def.fire,pressure);
-          e.fire=this.number(4.1,6.8)*(1-.36*pressure);
+          e.fire=this.number(7.5,11);
         }
-        if(d<e.r+.9) {this.hurt(11);this.damage(e,24);}
+        if(d<.62+e.r*.76 && e.contact<=0) {
+          this.hurt(8);e.contact=.9;const away=bearing(p,e);
+          e.kx+=Math.cos(away)*12;e.ky+=Math.sin(away)*12;
+          if(p.boost>0)this.damage(e,14,away);
+        }
       }
     }
     moveBoss(e,dt) {
@@ -4495,31 +4592,31 @@ window.Ember = (() => {
           for(const direction of angles) this.hazards.push({x:e.x,y:e.y,a:direction,len:85,width:1.05,warm:1.05,age:0,end:1.52});
           e.hold=1.52; e.fire=2.12; this.event('charge');
         } else if(e.index===1 || (e.index===2 && e.volley%2===0)) {
-          const count=[12,16,19][e.index]+(angry?4:0),phase=e.volley*.29;
-          for(let i=0;i<count;i++) this.hostileShot(e,phase+i/count*TAU,9+e.index*1.5,.38);
-          e.fire=angry?.74:1.02;
+          const count=[8,11,13][e.index]+(angry?2:0),phase=e.volley*.29;
+          for(let i=0;i<count;i++) this.hostileShot(e,phase+i/count*TAU,7+e.index*.8,.38);
+          e.fire=angry?1.22:1.55;
         } else {
-          const count=angry?9:7;
-          for(let i=0;i<count;i++) this.hostileShot(e,a+(i-(count-1)/2)*.16,15+e.index*2,.41);
-          e.fire=angry?.98:1.30;
+          const count=angry?7:5;
+          for(let i=0;i<count;i++) this.hostileShot(e,a+(i-(count-1)/2)*.20,10+e.index*1.15,.41);
+          e.fire=angry?1.30:1.65;
         }
       }
       if(dist2(p,e)<(e.r+.9)**2) this.hurt(16);
     }
     hostileShot(e,a,speed,r=.34) {
-      if(this.hostile.length>=420) return;
+      if(this.hostile.length>=(e.boss?96:12+Math.floor(20*this.pressure()))) return;
       this.hostile.push({x:e.x+Math.cos(a)*e.r*.66,y:e.y+Math.sin(a)*e.r*.66,
-        vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,a,r,life:6.7,boss:!!e.boss,
+        vx:Math.cos(a)*speed,vy:Math.sin(a)*speed,a,r,life:e.boss?6.1:5.4,boss:!!e.boss,
         style:e.boss?['shell','prism','corona'][e.index]:e.def.fire==='aim'?'needle':'orb'});
     }
     enemyVolley(e,pattern,pressure) {
-      const a=bearing(e,this.player),speed=11+pressure*4.5;
+      const a=bearing(e,this.player),speed=7.2+pressure*1.55;
       if(pattern==='ring') {
-        const n=pressure>.45?9:6;
+        const n=pressure>.45?5:4;
         for(let i=0;i<n;i++) this.hostileShot(e,a+i/n*TAU,speed*.78);
       } else {
         const angles=pattern==='fan'?[-.29,0,.29]:pattern==='pair'?[-.13,.13]:[0];
-        for(const offset of angles) this.hostileShot(e,a+offset,speed*(pattern==='aim'?1.45:1));
+        for(const offset of angles) this.hostileShot(e,a+offset,speed*(pattern==='aim'?1.18:1));
       }
     }
     nearest(origin,range,predicate) {
@@ -4530,6 +4627,67 @@ window.Ember = (() => {
         if(d<distance) {best=e;distance=d;}
       }
       return best;
+    }
+    blastScale() {return 1+.12*(this.parts.capacitor||0);}
+    positionDrones() {
+      this.drones.length=0;
+      const level=this.weapons.drone||0;
+      if(!level)return;
+      const p=this.player,c=Math.cos(p.a),s=Math.sin(p.a);
+      const count=this.evolved.has('drone')?3:level>=3?2:1;
+      for(let i=0;i<count;i++){
+        const cross=[3.1,-3.1,0][i]*(1+.08*Math.sin(this.elapsed*3+i));
+        const back=i===2?4:1.8;
+        this.drones.push({x:p.x-c*back-s*cross,y:p.y-s*back+c*cross,a:p.a});
+      }
+    }
+    fireBeam(origin,a,length,width,damage,color) {
+      this.effect('beam',{x:origin.x,y:origin.y,a,len:length,color,size:width*.72},.17);
+      for(const e of this.enemies) if(!e.dead && inRay(e,origin.x,origin.y,a,length,e.r+width))
+        this.damage(e,damage,a,1.45);
+    }
+    chain(origin,jumps,firstRange,jumpRange,damage,color,width) {
+      const struck=new Set();
+      for(let i=0;i<jumps;i++) {
+        const target=this.nearest(origin,i===0?firstRange:jumpRange,e=>!struck.has(e.id));
+        if(!target)break;
+        struck.add(target.id);
+        this.effect('arc',{x:origin.x,y:origin.y,tx:target.x,ty:target.y,color,size:width},.19);
+        this.damage(target,damage,bearing(origin,target));
+        origin=target;
+      }
+      return struck.size;
+    }
+    launchWings(origin,a,count,damage,evolved) {
+      for(let i=0;i<count;i++) {
+        const angle=a+(i-(count-1)/2)*.36;
+        const wing=this.shot('boomerang',origin,angle,evolved?36:30,damage,0,Infinity);
+        wing.age=0;wing.returnAt=evolved?.78:.62;wing.life=3.4;wing.r=.8;
+      }
+    }
+    sendPulse(origin,radius,damage,color,options={}) {
+      const maxRadius=radius*this.blastScale();
+      this.pulses.push({x:origin.x,y:origin.y,r:0,maxRadius,speed:maxRadius/.58,
+        damage,color,age:-(options.delay||0),hits:new Set(),force:2.6,...options});
+    }
+    updatePulses(dt) {
+      for(const w of this.pulses) {
+        w.age+=dt;
+        if(w.follow){w.x=this.player.x;w.y=this.player.y;}
+        if(w.age<=0)continue;
+        const inner=Math.max(0,w.r-1.4);
+        w.r=Math.min(w.maxRadius,w.r+w.speed*dt);
+        for(const e of this.enemies){
+          if(e.dead || w.hits.has(e.id))continue;
+          const d2=dist2(e,w);
+          if(d2>(w.r+e.r)**2 || d2<Math.max(0,inner-e.r)**2)continue;
+          w.hits.add(e.id);
+          if(w.chill && !e.boss)e.chill=Math.max(e.chill,w.chill);
+          this.damage(e,w.damage,bearing(w,e),w.force);
+        }
+        if(w.clear) for(const b of this.hostile) if(dist2(b,w)<(w.r+b.r)**2)b.life=0;
+      }
+      this.pulses=this.pulses.filter(w=>w.r<w.maxRadius);
     }
     fireWeapons(dt) {
       const p=this.player;
@@ -4543,11 +4701,11 @@ window.Ember = (() => {
           const target=this.nearest(p,61,e=>Math.abs(angleDelta(p.a,bearing(p,e)))<.18);
           const a=target?bearing(p,target):p.a;
           if(evolved) {
-            this.effect('beam',{x:p.x,y:p.y,a,len:77,color:'#ffd177',size:.72},.17);
-            for(const e of this.enemies) if(!e.dead && inRay(e,p.x,p.y,a,77,e.r+1.05)) this.damage(e,48*power);
+            this.fireBeam(p,a,77,1.05,48*power,'#ffd177');
             delay=.49;
           } else {
             for(const offset of level>=3?[-.55,.55]:[0]) this.shot(id,p,a,54+level*2,(10+level*2.5)*power,offset,level>=5?2:1);
+            this.effect('muzzle',{x:p.x+Math.cos(a)*2.9,y:p.y+Math.sin(a)*2.9,a,color:'#a4f7ff',size:1},.08);
             delay=.305-level*.018;
           }
           if(this.form==='solar') delay*=.70;
@@ -4568,25 +4726,106 @@ window.Ember = (() => {
           }
           delay=evolved?.80:1.04-level*.065;
         } else if(id==='arc') {
-          let origin=p;
-          const struck=new Set(),jumps=1+Math.ceil(level/2)+(evolved?3:0)+(this.form==='storm'?3:0);
-          for(let i=0;i<jumps;i++) {
-            const range=(i===0?18+level*2.3:12+level)+(evolved?11:0);
-            const target=this.nearest(origin,range,e=>!struck.has(e.id));
-            if(!target) break;
-            struck.add(target.id);
-            this.effect('arc',{x:origin.x,y:origin.y,tx:target.x,ty:target.y,color:evolved?'#e0bcff':'#ad93ff',size:evolved?.34:.22},.21);
-            this.damage(target,(12+level*4.3)*(evolved?1.55:1)*power);
-            origin=target;
-          }
-          if(struck.size) this.event('gun',{id});
-          delay=struck.size?1.18-level*.075:.16;
+          const jumps=1+Math.ceil(level/2)+(evolved?3:0)+(this.form==='storm'?3:0),extra=evolved?11:0;
+          const hits=this.chain(p,jumps,18+level*2.3+extra,12+level+extra,
+            (12+level*4.3)*(evolved?1.55:1)*power,evolved?'#e0bcff':'#ad93ff',evolved?.34:.22);
+          if(hits)this.event('gun',{id});
+          delay=hits?1.18-level*.075:.16;
         } else if(id==='mine') {
           this.shots.push({kind:id,x:p.x-Math.cos(p.a)*2,y:p.y-Math.sin(p.a)*2,vx:0,vy:0,a:p.a,
             life:7,age:0,r:2.7+level*.48,damage:(26+level*7)*power,evolved,level});
           delay=2.35-level*.20;
+        } else if(id==='boomerang') {
+          const count=evolved?3:level>=3?2:1;
+          const target=this.nearest(p,38),a=target?bearing(p,target):p.a;
+          this.launchWings(p,a,count,(12+level*4)*(evolved?1.38:1)*power,evolved);
+          delay=1.36-level*.07;
+        } else if(id==='sonic') {
+          const radius=8+level*1.3,damage=(15+level*4.4)*power;
+          this.sendPulse(p,radius,damage,weapons.sonic.color);
+          if(evolved)this.sendPulse(p,radius+3,damage,'#ffe6ad',{delay:.27,follow:true});
+          this.event('wave');
+          delay=2.9-level*.14;
+        } else if(id==='drone') {
+          let fired=false;
+          for(const drone of this.drones) {
+            const target=this.nearest(drone,47);
+            if(!target)continue;
+            const a=bearing(drone,target);
+            for(const offset of evolved?[-.31,.31]:[0])
+              this.shot(id,drone,a,47,(7+level*2.4)*power,offset,evolved?2:1);
+            this.effect('muzzle',{x:drone.x,y:drone.y,a,color:weapons.drone.color,size:.61},.09);
+            fired=true;
+          }
+          delay=fired ? .70-level*.045 : .18;
+        } else if(id==='frost') {
+          const target=this.nearest(p,51);
+          if(target){
+            const spike=this.shot(id,p,bearing(p,target),40+level*2,(11+level*3.8)*power,0,1+Math.ceil(level/2));
+            spike.chill=.65+level*.24;spike.evolved=evolved;spike.r=.52;
+          }
+          delay=target ? .93-level*.055 : .17;
         }
         this.cooldowns[id]=delay*(1-.08*(this.parts.reactor||0));
+      }
+    }
+    fireFusions(dt) {
+      const p=this.player,power=1+.12*(this.parts.lens||0);
+      for(const id of this.fusions) {
+        this.cooldowns[id]=(this.cooldowns[id]||0)-dt;
+        if(this.cooldowns[id]>0)continue;
+        const recipe=E.fusions[id],color=recipe.color;
+        const target=this.nearest(p,72);
+        if(!target){this.cooldowns[id]=.20;continue;}
+        const flank=side=>({x:p.x-Math.sin(p.a)*side*3.2,y:p.y+Math.cos(p.a)*side*3.2});
+        switch(id){
+          case 'sunrail':
+            for(const side of [-1,1]){
+              const pod=flank(side);
+              this.fireBeam(pod,bearing(pod,target),79,1.32,46*power,color);
+            }
+            break;
+          case 'maelstrom':
+            this.sendPulse(p,17,29*power,color);
+            this.chain(p,7,35,15,32*power,color,.32);
+            break;
+          case 'bulwark':
+            this.sendPulse(p,15,39*power,color,{follow:true,clear:true,force:4.4});
+            break;
+          case 'twinwake':
+            for(const side of [-1,1])this.launchWings(flank(side),p.a+side*.92,2,32*power,true);
+            break;
+          case 'whiteout':
+            this.sendPulse(p,24,36*power,color,{chill:2.2});
+            break;
+          case 'relay':
+            for(const side of [-1,1])this.chain(flank(side),5,38,17,30*power,color,.25);
+            break;
+          case 'tidal': {
+            const second=this.nearest(p,66,e=>e.id!==target.id && dist2(e,target)>100);
+            for(const body of [target,second])if(body)
+              this.wells.push({x:body.x,y:body.y,r:9*this.blastScale(),life:2.1,tick:0,damage:15*power});
+            break;
+          }
+          case 'dawn':
+            for(let i=-2;i<=2;i++)this.fireBeam(p,p.a+i*.22,82,1.6,76*power,color);
+            this.launchWings(p,p.a,3,46*power,true);
+            break;
+          case 'aurora':
+            for(let i=0;i<3;i++)this.sendPulse(p,20+i*4,41*power,color,{delay:i*.22,chill:2.6,follow:true});
+            this.chain(p,11,42,21,49*power,color,.43);
+            break;
+          case 'horizon':
+            for(let i=0;i<3;i++)this.sendPulse(p,15+i*2,42*power,color,{delay:i*.28,follow:true,clear:true,force:5});
+            for(const side of [-1,1])this.chain(flank(side),7,42,18,38*power,color,.34);
+            break;
+          case 'solstice':
+            this.wells.push({x:target.x,y:target.y,r:14*this.blastScale(),life:2.5,tick:0,damage:24*power,chill:1.7});
+            this.sendPulse(target,23,64*power,color,{delay:1.8,chill:2.5,force:4});
+            break;
+        }
+        this.cooldowns[id]=recipe.period*(1-.08*(this.parts.reactor||0));
+        this.event('fusionFire',{tier:recipe.tier});
       }
     }
     shot(kind,p,a,speed,damage,offset,pierce) {
@@ -4597,9 +4836,9 @@ window.Ember = (() => {
       return b;
     }
     explodeMine(b) {
-      const radius=b.r+(b.evolved?5.4:3.1);
+      const radius=(b.r+(b.evolved?5.4:3.1))*this.blastScale();
       this.burst(b.x,b.y,'#f9a5d9',1.55);this.pulseRing(b.x,b.y,'#dc7dff',radius);
-      for(const e of this.enemies) if(!e.dead && dist2(e,b)<(radius+e.r)**2) this.damage(e,b.damage);
+      for(const e of this.enemies) if(!e.dead && dist2(e,b)<(radius+e.r)**2) this.damage(e,b.damage,bearing(b,e),2);
       if(b.evolved) this.wells.push({x:b.x,y:b.y,r:radius+1.8,life:2.4,tick:0,damage:b.damage*.20});
       b.life=0;
     }
@@ -4615,16 +4854,35 @@ window.Ember = (() => {
           if(!b.target || b.target.dead) b.target=this.nearest(b,55);
           if(b.target) b.a=turn(b.a,bearing(b,b.target),dt*4.6);
           b.vx=Math.cos(b.a)*b.speed;b.vy=Math.sin(b.a)*b.speed;
+        } else if(b.kind==='boomerang') {
+          b.age+=dt;
+          if(!b.returning && b.age>=b.returnAt) {b.returning=true;b.hit.clear();}
+          if(b.returning) {
+            if(dist2(b,this.player)<2**2){b.life=0;continue;}
+            b.a=turn(b.a,bearing(b,this.player),dt*9.5);
+          } else b.a+=dt*.52;
+          const speed=b.speed*(b.returning?1.30:1);
+          b.vx=Math.cos(b.a)*speed;b.vy=Math.sin(b.a)*speed;
         }
         b.x+=b.vx*dt;b.y+=b.vy*dt;
-        for(const e of this.enemies) {
+        for(const e of this.grid.near(b.x,b.y,b.r+2.8,true)) {
           if(e.dead || b.hit.has(e.id) || dist2(e,b)>(e.r+b.r)**2) continue;
-          b.hit.add(e.id);this.damage(e,b.damage);
+          b.hit.add(e.id);this.damage(e,b.damage,b.a);
+          if(b.kind==='frost') {
+            if(!e.boss)e.chill=Math.max(e.chill,b.chill);
+            if(b.evolved) {
+              this.pulseRing(e.x,e.y,'#9edcff',4.4);
+              for(const other of this.enemies) if(!other.dead && !other.boss && dist2(e,other)<(4.4+other.r)**2)
+                other.chill=Math.max(other.chill,b.chill);
+            }
+          }
           if(b.kind==='missile') {
             this.burst(b.x,b.y,'#ffa266',b.evolved?1.3:.58);
             if(b.evolved) {
-              this.pulseRing(b.x,b.y,'#ffc17b',6.5);
-              for(const other of this.enemies) if(other!==e && !other.dead && dist2(other,b)<(6.5+other.r)**2) this.damage(other,b.damage*.78);
+              const radius=6.5*this.blastScale();
+              this.pulseRing(b.x,b.y,'#ffc17b',radius);
+              for(const other of this.enemies) if(other!==e && !other.dead && dist2(other,b)<(radius+other.r)**2)
+                this.damage(other,b.damage*.78,bearing(b,other),1.6);
             }
           }
           if(--b.pierce<=0) {b.life=0;break;}
@@ -4659,7 +4917,10 @@ window.Ember = (() => {
         w.life-=dt;w.tick-=dt;
         for(const e of this.enemies) {
           if(e.dead || dist2(e,w)>(w.r+e.r)**2) continue;
-          if(!e.boss) {e.x+=(w.x-e.x)*dt*1.25;e.y+=(w.y-e.y)*dt*1.25;}
+          if(!e.boss) {
+            e.x+=(w.x-e.x)*dt*1.25;e.y+=(w.y-e.y)*dt*1.25;
+            if(w.chill)e.chill=Math.max(e.chill,w.chill);
+          }
           if(w.tick<=0) this.damage(e,w.damage);
         }
         if(w.tick<=0) w.tick=.38;
@@ -4674,9 +4935,21 @@ window.Ember = (() => {
       }
       this.hazards=this.hazards.filter(h=>h.age<h.end);
     }
-    damage(e,n) {
+    damage(e,n,direction,force=1) {
       if(e.dead) return;
-      e.hp-=n;e.hit=.095;
+      const fresh=e.hit<=0,a=direction??bearing(this.player,e);
+      e.hp-=n;e.hit=.105;
+      if(!e.boss) {
+        const impulse=Math.min(14,1.8+n*.065)*force;
+        e.kx=clamp(e.kx+Math.cos(a)*impulse,-19,19);e.ky=clamp(e.ky+Math.sin(a)*impulse,-19,19);
+        e.stun=Math.max(e.stun,Math.min(.09,.026*force));
+      }
+      if(fresh && this.impactBudget>0) {
+        this.impactBudget--;
+        const size=Math.min(1.75,.65+n*.012);
+        this.effect('strike',{x:e.x-Math.cos(a)*e.r*.55,y:e.y-Math.sin(a)*e.r*.55,a,size,color:e.boss?'#ffcc92':'#ffd8ac'},.17);
+        this.event('strike',{heft:size});
+      }
       if(e.hp>0) return;
       e.dead=true;this.kills++;
       if(e.boss) {
@@ -4690,11 +4963,11 @@ window.Ember = (() => {
       } else {
         this.score+=Math.round((75+e.def.id*8)*variants[e.variant].score);
         this.burst(e.x,e.y,variants[e.variant].color,.65+e.r*.16);
-        const value=3+e.variant+Math.floor(e.def.id/4);
+        const value=2+Math.floor(e.variant*.65+e.def.id/6);
         if(this.gems.length<220) this.gems.push({x:e.x,y:e.y,vx:this.number(-2,2),vy:this.number(-2,2),value,age:0,locked:false,kind:'xp'});
-        else this.gems[this.gems.length-1].value+=value;
-        if(this.player.hp<87 && this.random()<.037) this.gems.push({x:e.x+1,y:e.y+1,vx:0,vy:0,value:12,age:0,kind:'repair'});
-        this.event('kill');
+        else {const crystal=this.gems.find(g=>g.kind==='xp' && !g.gone);if(crystal)crystal.value+=value;}
+        this.dropSupply(e);
+        this.event('kill',{heft:e.r});
       }
     }
     hurt(amount) {
@@ -4705,24 +4978,42 @@ window.Ember = (() => {
       this.pulseRing(p.x,p.y,'#ff6493',4.5);
       if(p.hp===0) {this.mode='lost';this.burst(p.x,p.y,'#ff9c63',2.3);this.event('end');}
     }
+    dropSupply(e) {
+      // The next local kill after a supply window drops it, even in a dense wave.
+      if(dist2(e,this.player)>48**2)return;
+      for(const kind of Object.keys(this.dropDue)) {
+        if(this.elapsed<this.dropDue[kind])continue;
+        const delay=kind==='repair'?(this.player.hp<55?13:26):kind==='magnet'?23:31;
+        this.dropDue[kind]=this.elapsed+delay+this.number(0,6);
+        this.gems.push({kind,x:e.x,y:e.y,vx:0,vy:0,age:0,value:kind==='repair'?22:0});
+        break;
+      }
+    }
     updateGems(dt) {
       const p=this.player,magnet=14+(this.parts.magnet||0)*7;
       for(const g of this.gems) {
         g.age+=dt;
         const d=Math.sqrt(dist2(g,p));
-        if(d<magnet || (g.age>12 && d<magnet+9)) g.locked=true;
+        const crystal=g.kind==='xp';
+        if(crystal?(d<magnet || (g.age>12 && d<magnet+9)):d<5.6) g.locked=true;
         if(g.locked) {
-          const speed=27+Math.min(28,g.age*2.5),f=Math.min(1,dt*8);
+          const speed=g.pulled?Math.max(54,d*1.5):27+Math.min(28,g.age*2.5),f=Math.min(1,dt*8);
           g.vx+=((p.x-g.x)/Math.max(.1,d)*speed-g.vx)*f;
           g.vy+=((p.y-g.y)/Math.max(.1,d)*speed-g.vy)*f;
         } else {g.vx*=Math.exp(-dt*2);g.vy*=Math.exp(-dt*2);}
         g.x+=g.vx*dt;g.y+=g.vy*dt;
-        if(d<1.75) {
-          if(g.kind==='repair') {p.hp=Math.min(100,p.hp+g.value);this.event('repair');}
-          else {this.xp+=g.value;this.event('gem');}
+        if(d<(crystal?1.75:2.05)) {
+          if(crystal) {this.xp+=g.value;this.event('gem');}
+          else {
+            if(g.kind==='repair')p.hp=Math.min(100,p.hp+g.value);
+            if(g.kind==='fuel')p.fuel=8;
+            if(g.kind==='magnet') for(const gem of this.gems) if(gem.kind==='xp' && !gem.gone){gem.pulled=true;gem.locked=true;}
+            this.pulseRing(p.x,p.y,E.supplies[g.kind].color,g.kind==='magnet'?10:4);
+            this.event('pickup',{id:g.kind});
+          }
           g.gone=true;
         }
-        if(d>145 || g.age>90) g.gone=true;
+        if(!g.pulled && (d>145 || g.age>(crystal?90:55))) g.gone=true;
       }
       this.gems=this.gems.filter(g=>!g.gone);
     }
@@ -4735,24 +5026,41 @@ window.Ember = (() => {
       }
       this.mode='draft';this.event('level');
     }
+    canTrack(id) {
+      const path=E.recipePath(id);
+      const neededWeapons=new Set([...Object.keys(this.weapons),...path.bases]);
+      const neededParts=new Set([...Object.keys(this.parts),...[...path.bases].map(key=>weapons[key].part)]);
+      return !!E.fusions[id] && neededWeapons.size<=E.WEAPON_SLOTS && neededParts.size<=E.PART_SLOTS;
+    }
     makeDraft() {
       const candidates=[],chosen=[];
       const add=(kind,id)=>candidates.push({kind,id});
       for(const id of Object.keys(weapons)) {
         const lv=this.weapons[id]||0;
         if(lv===5 && this.parts[weapons[id].part] && !this.evolved.has(id)) add('evo',id);
-        if(lv<5 && (lv || Object.keys(this.weapons).length<4)) add('weapon',id);
+        if(lv<5 && (lv || Object.keys(this.weapons).length<E.WEAPON_SLOTS)) add('weapon',id);
       }
       for(const id of Object.keys(parts)) {
         const lv=this.parts[id]||0;
-        if(lv<3 && (lv || Object.keys(this.parts).length<3)) add('part',id);
+        if(lv<3 && (lv || Object.keys(this.parts).length<E.PART_SLOTS)) add('part',id);
+      }
+      for(const [id,recipe] of Object.entries(E.fusions)){
+        if(!this.fusions.has(id) && recipe.needs.every(key=>this.evolved.has(key)||this.fusions.has(key)))add('fusion',id);
       }
       const take=pool=>{
         const available=pool.filter(c=>!chosen.includes(c));
         if(available.length && chosen.length<3) chosen.push(this.pick(available));
       };
+      if(this.target && !this.fusions.has(this.target)) {
+        const path=E.recipePath(this.target),desiredParts=[...path.bases].map(id=>weapons[id].part);
+        const tracked=candidates.filter(c=>c.kind==='fusion'?path.combos.has(c.id):c.kind==='part'?desiredParts.includes(c.id) && !this.parts[c.id]:path.bases.has(c.id));
+        const priority=c=>c.kind==='fusion'?10+E.fusions[c.id].tier:c.kind==='evo'?9:c.kind==='part'?5:c.kind==='weapon'&&this.weapons[c.id]?6:4;
+        const best=Math.max(0,...tracked.map(priority));take(tracked.filter(c=>priority(c)===best));
+      }
+      take(candidates.filter(c=>c.kind==='fusion' && E.fusions[c.id].tier===3));
+      take(candidates.filter(c=>c.kind==='fusion'));
       const evo=candidates.filter(c=>c.kind==='evo');
-      while(chosen.length<Math.min(3,evo.length)) take(evo);
+      while(chosen.length<3 && evo.some(c=>!chosen.includes(c))) take(evo);
       if(this.random()<.89) take(candidates.filter(c=>c.kind==='weapon' && this.weapons[c.id]));
       const missingPartners=Object.keys(this.weapons).map(id=>weapons[id].part).filter(id=>!this.parts[id]);
       if(this.random()<.42) take(candidates.filter(c=>c.kind==='part' && missingPartners.includes(c.id)));
@@ -4777,8 +5085,12 @@ window.Ember = (() => {
       if(kind==='weapon') this.weapons[id]=(this.weapons[id]||0)+1;
       if(kind==='part') this.parts[id]=(this.parts[id]||0)+1;
       if(kind==='evo') {this.evolved.add(id);this.event('evolved',{id});}
+      if(kind==='fusion') {this.fusions.add(id);this.event('fusion',{id});}
       if(kind==='repair') this.player.hp=Math.min(100,this.player.hp+30);
       if(kind==='score') this.score+=2000;
+      if(this.target && !this.fusions.has(this.target) && !this.canTrack(this.target)){
+        this.event('routeFull',{id:this.target});this.target='';
+      }
       this.mode='fly';this.choices=[];this.player.inv=Math.max(this.player.inv,.65);
       for(const [key,form] of Object.entries(forms)) {
         if(!this.forms.includes(key) && this.evolved.has(form.base) && this.weapons[form.partner]) {
@@ -4810,9 +5122,11 @@ window.Ember = (() => {
   const box=new T.BoxGeometry(1,1,1),sphere=new T.SphereGeometry(1,12,8);
   const gem=new T.OctahedronGeometry(1), drum=new T.CylinderGeometry(1,1,1,12);
   const ring=new T.TorusGeometry(1,.115,6,32);
+  const fleetShapes=new Map([[sphere,new T.SphereGeometry(1,6,3)],[drum,new T.CylinderGeometry(1,1,1,5)],[ring,new T.TorusGeometry(1,.115,3,12)]]);
   class Model {
-    constructor() {this.pos=[];this.norm=[];this.colors=[];this.object=new T.Object3D();}
+    constructor(distant=false) {this.distant=distant;this.pos=[];this.norm=[];this.colors=[];this.object=new T.Object3D();}
     piece(geo,color,x,y,z,sx=1,sy=1,sz=1,rx=0,ry=0,rz=0) {
+      if(this.distant)geo=fleetShapes.get(geo)||geo;
       const o=this.object;o.position.set(x,y,z);o.scale.set(sx,sy,sz);
       o.rotation.set(rx,ry,rz,'ZYX');o.updateMatrix();
       const matrix=o.matrix,normal=new T.Matrix3().getNormalMatrix(matrix);
@@ -4830,7 +5144,7 @@ window.Ember = (() => {
       const outline=new T.Shape();
       points.forEach(([x,y],i)=>i?outline.lineTo(x,y):outline.moveTo(x,y));
       outline.closePath();
-      const geometry=new T.ExtrudeGeometry(outline,{depth,steps:1,bevelEnabled:true,bevelSegments:1,bevelSize:Math.min(.07,depth*.34),bevelThickness:Math.min(.055,depth*.28)});
+      const geometry=new T.ExtrudeGeometry(outline,{depth,steps:1,bevelEnabled:!this.distant,bevelSegments:1,bevelSize:Math.min(.07,depth*.34),bevelThickness:Math.min(.055,depth*.28)});
       this.piece(geometry,color,0,0,z);geometry.dispose();
     }
     mirrored(points,z,depth,color) {
@@ -4886,8 +5200,8 @@ window.Ember = (() => {
     }
     return m.finish();
   }
-  function enemy(id,variant) {
-    const d=E.species[id],m=new Model(),accent=E.variants[variant].color;
+  function enemy(id,variant,distant=false) {
+    const d=E.species[id],m=new Model(distant),accent=E.variants[variant].color;
     const metal=id%3===0?'#887d83':id%3===1?'#83919a':'#b0a6ab';
     const body=d.body;
     if(['urchin','crown','loom'].includes(body)) {
@@ -4934,9 +5248,24 @@ window.Ember = (() => {
     } else {
       const needle=body==='needle',long=needle?2.03:1.53;
       m.plate([[-1.26,-.42],[-.5,-.58],[long,0],[-.5,.58],[-1.26,.42]],-.18,.35,metal);
-      m.mirrored([[.61,.16],[-.49,.62],[-1.24,needle?1.61:1.20],[-1.46,.86],[-1.02,.28]],.02,.15,accent);
+      const span=needle?1.61:body==='dart'?1.77:1.20;
+      m.mirrored([[.61,.16],[-.49,.62],[-1.09,span],[-1.49,span*.88],[-1.02,.28]],.02,.15,accent);
       m.crystal(.06,0,.30,long*.70,.43,.34,accent);
       if(body==='comet') for(const s of [-1,1]) m.tube(-.60,s*.49,.07,1.73,.24,graphite);
+    }
+    if(distant) {
+      if(['urchin','loom','crown','shell','beetle','jelly','squid','leviathan'].includes(body)){
+        m.block(.24,0,.69,.47,.66,.11,graphite);
+        m.block(.27,0,.76,.27,.44,.06,'#f4b579');
+      }else{
+        m.crystal(.19,0,.42,.70,.35,.26,graphite);
+        m.crystal(.39,0,.57,.40,.22,.14,'#ecb376');
+        for(const side of [-1,1]){
+          m.block(-.68,side*.51,.19,.73,.24,.24,graphite);
+          m.block(-1.04,side*.51,.2,.13,.22,.18,'#ffd7a1');
+        }
+      }
+      return m.finish();
     }
     if(['dart','needle','comet','wing','fork'].includes(body)) {
       for(const s of [-1,1]) {
@@ -5032,7 +5361,14 @@ window.Ember = (() => {
     }
     return m.finish();
   }
-  E.models={interceptor,enemy,boss,wreck};
+  function wingman() {
+    const m=new Model(true);
+    m.mirrored([[.85,.1],[.12,.7],[-.77,1.24],[-1.01,.86],[-.62,.18]],0,.15,'#b4efdc');
+    m.crystal(0,0,.16,1.4,.38,.29,ivory);
+    m.crystal(.27,0,.32,.59,.24,.17,'#247384');
+    return m.finish();
+  }
+  E.models={interceptor,enemy,boss,wreck,wingman};
 })();
 
 </script>
@@ -5070,15 +5406,18 @@ window.Ember = (() => {
       const key=new T.DirectionalLight(0xffead2,2.30);key.position.set(-12,19,25);this.scene.add(key);
       const rim=new T.DirectionalLight(0x73c6ff,1.40);rim.position.set(17,-15,7);this.scene.add(rim);
       this.metal=new T.MeshStandardMaterial({vertexColors:true,roughness:.43,metalness:.30});
+      this.fleetMetal=new T.MeshLambertMaterial({vertexColors:true});
       this.lit=new T.MeshStandardMaterial({color:0xffffff,roughness:.48,metalness:.27,flatShading:true});
       this.basic=new T.MeshBasicMaterial({color:0xffffff});
       this.additive=new T.MeshBasicMaterial({map:glowMap(),color:0xffffff,transparent:true,
         depthWrite:false,depthTest:false,blending:T.AdditiveBlending});
       this.batches=new Map();this.transform=new T.Object3D();this.color=new T.Color();
       this.createBatch('glow',new T.PlaneGeometry(1,1),this.additive,2400,5);
-      this.createBatch('dot',new T.SphereGeometry(1,10,6),this.basic,1600,2);
+      this.createBatch('dot',new T.CircleGeometry(1,12),this.basic,2200,2);
       const rimInk=new T.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.83,blending:T.AdditiveBlending,depthWrite:false});
       this.createBatch('ring',new T.TorusGeometry(1,.038,4,44),rimInk,650,3);
+      this.createBatch('wavefront',new T.RingGeometry(.989,1,72),rimInk,100,3);
+      this.createBatch('wingman',E.models.wingman(),this.metal,3);
       this.createBatch('shard',new T.OctahedronGeometry(1),this.lit,450);
       this.createBatch('rock',new T.DodecahedronGeometry(1,0),this.lit,38,-2);
       this.createBatch('wreck',E.models.wreck(),this.metal,12,-2);
@@ -5165,7 +5504,7 @@ window.Ember = (() => {
       const key='ship-'+f.form;
       if(!this.batches.has(key)) this.createBatch(key,E.models.interceptor(f.form),this.metal,1);
       if(f.mode==='lost') return;
-      const thrust=p.boost>0?2.4:1,flame=.92+Math.sin(t*47)*.13;
+      const thrust=p.boost>0?2.4:p.fuel>0?1.42:Math.max(.63,p.speed/9.6),flame=.92+Math.sin(t*47)*.13;
       const c=Math.cos(a),s=Math.sin(a),color=f.form?E.forms[f.form].color:'#64dfff';
       if(t>this.lastTime+.024 || this.lastTime<0) {
         this.trail.push({x:p.x-c*2.2,y:p.y-s*2.2,t,a,boost:p.boost>0});this.lastTime=t;
@@ -5188,6 +5527,11 @@ window.Ember = (() => {
       const tint=p.inv>0 && Math.sin(t*29)>.32?'#abceef':'#ffffff';
       this.instance(key,x,y,.55,1,1,1,a,-.15+p.bank*.58,Math.sin(t*3.5)*.052,tint);
       this.dot(x,y,1.64,.17,.17,'#edffff');
+      for(const drone of f.drones) {
+        const dx=drone.x-f.cam.x,dy=drone.y-f.cam.y;
+        this.instance('wingman',dx,dy,.76,.84,.84,.84,drone.a,p.bank*.36,0);
+        this.halo(dx-Math.cos(a)*1.1,dy-Math.sin(a)*1.1,2.5,'#6de9c9',.74,a);
+      }
       if(p.shield || p.boost>0) {this.circle(x,y,p.shield?3.08:2.60,p.shield?'#76efb4':'#93ecf8');}
       if(f.weapons.blade) {
         for(const b of f.blades) {
@@ -5203,10 +5547,12 @@ window.Ember = (() => {
       for(const e of f.enemies) {
         const x=e.x-cx,y=e.y-cy;
         if(Math.abs(x)>this.halfW+7 || Math.abs(y)>this.halfH+7) continue;
-        const key=e.boss?'boss-'+e.index:'enemy-'+e.def.id+'-'+e.variant;
-        if(!this.batches.has(key)) this.createBatch(key,e.boss?E.models.boss(e.index):E.models.enemy(e.def.id,e.variant),this.metal,e.boss?1:140);
+        const distant=!e.boss && (e.x-f.player.x)**2+(e.y-f.player.y)**2>17**2;
+        const key=e.boss?'boss-'+e.index:'enemy-'+e.def.id+'-'+e.variant+(distant?'-fleet':'');
+        if(!this.batches.has(key)) this.createBatch(key,e.boss?E.models.boss(e.index):E.models.enemy(e.def.id,e.variant,distant),
+          distant?this.fleetMetal:this.metal,e.boss?1:E.ENEMY_CAP);
         const size=e.boss?[1.80,1.81,1.88][e.index]:e.r*.86,a=e.a;
-        const tint=e.hit>0?'#ffdfbf':'#ffffff';
+        const tint=e.hit>0?'#fff0d4':e.chill>0?'#83d4ff':'#ffffff';
         this.instance(key,x,y,.47,size,size,size,a,Math.sin(t*2.1+e.id)*.25,-.12,tint);
         const color=e.boss?E.sectors[e.index].color:E.variants[e.variant].color;
         this.halo(x,y,e.boss?4.4:1.24,color);
@@ -5221,7 +5567,8 @@ window.Ember = (() => {
           }
           if(e.hold>0) this.halo(x,y,4.1+Math.sin(t*22)*1.1,color);
         } else {
-          if(e.hit>0) this.halo(x,y,2.55,'#ffcaa5');
+          if(e.hit>0) this.halo(x,y,3.45*size,'#ffdb9b');
+          if(e.chill>0)this.circle(x,y,size*1.38,'#77c5ef',.25);
           if(['sweep','dive'].includes(e.def.motion)) {
             const c=Math.cos(a),s=Math.sin(a),r=size*(1.64+Math.sin(e.age*17)*.14);
             this.halo(x-c*r,y-s*r,2.35*size,color,.70*size,a);
@@ -5239,7 +5586,20 @@ window.Ember = (() => {
           this.halo(x,y,2.9,'#ab4c9b');continue;
         }
         const a=b.a,c=Math.cos(a),s=Math.sin(a),missile=b.kind==='missile',fan=b.kind==='fan';
-        const color=missile?'#ff9c53':fan?'#ffd770':'#56defe';
+        if(b.kind==='boomerang') {
+          const phase=a+b.age*13,span=1.22;
+          for(const side of [-1,1]) {
+            const ax=x+Math.cos(phase+side*1.98)*span,ay=y+Math.sin(phase+side*1.98)*span;
+            this.line(x,y,ax,ay,.24,'#c1f4ff',2.2);
+            this.line(ax,ay,ax-Math.cos(phase)*.69,ay-Math.sin(phase)*.69,.13,'#78ccec');
+          }
+          this.halo(x,y,3.5,'#59bded');continue;
+        }
+        if(b.kind==='frost'){
+          this.line(x,y,x-c*1.82,y-s*1.82,.17,'#7bafef');
+          this.instance('shard',x,y,1.55,1.22,.32,.29,a,0,0,'#c6e9ff');continue;
+        }
+        const color=missile?'#ff9c53':fan?'#ffd770':b.kind==='drone'?'#79f7c1':'#56defe';
         this.halo(x-c*.64,y-s*.64,missile?3.6:3.15,color,missile?1.28:.86,a);
         this.dot(x,y,1.65,missile?.83:fan?.60:.98,missile?.24:.14,missile?'#ffdab9':'#edffff',a);
         if(missile) this.dot(x-c*.82,y-s*.82,1.21,.72,.18,'#ff813e',a);
@@ -5262,10 +5622,22 @@ window.Ember = (() => {
         }
       }
       for(const g of f.gems) {
-        const x=g.x-cx,y=g.y-cy,repair=g.kind==='repair';
+        const x=g.x-cx,y=g.y-cy,supply=E.supplies[g.kind];
         if(Math.abs(x)>this.halfW+1 || Math.abs(y)>this.halfH+1) continue;
-        if(repair) {
-          this.circle(x,y,.99,'#8bffd9');this.dot(x,y,1.4,.61,.19,'#8fffd5');this.dot(x,y,1.4,.19,.61,'#8fffd5');
+        if(supply) {
+          const color=supply.color;
+          this.dot(x,y,2.85,1.24,1.24,'#13272d');
+          this.circle(x,y,1.27,color,3.06);this.circle(x,y,1.55+.17*Math.sin(t*5),color,.75);
+          this.halo(x,y,3.9,color);
+          if(g.kind==='repair') {
+            this.dot(x,y,3.18,.78,.24,color);this.dot(x,y,3.18,.24,.78,color);
+          } else if(g.kind==='magnet') {
+            for(const side of [-1,1])this.line(x+side*.51,y+.52,x+side*.51,y-.39,.19,color,3.18);
+            this.line(x-.51,y-.45,x+.51,y-.45,.20,color,3.18);
+          } else {
+            for(const offset of [-.34,.32])for(const side of [-1,1])
+              this.line(x+side*.51,y-.21+offset,x,y+.29+offset,.15,color,3.18);
+          }
         } else {
           const size=g.value>5?.62:.47;
           this.instance('shard',x,y,.63,size*1.05,size*1.4,size*.7,.16,0,t*2.4+g.x,'#70ffcc');
@@ -5277,6 +5649,20 @@ window.Ember = (() => {
       const cx=f.cam.x,cy=f.cam.y;
       for(const fx of f.effects) {
         const x=fx.x-cx,y=fx.y-cy,q=1-fx.life/fx.maxLife,k=1-q;
+        if(fx.type==='muzzle'){
+          this.halo(x,y,3.1*k*fx.size,fx.color,1.7*k*fx.size,fx.a);
+          this.dot(x,y,2.8,fx.size*(.3+k),.3*k,'#faffeb',fx.a);
+        }
+        if(fx.type==='strike'){
+          const size=fx.size,travel=size*(.28+q*2.15);
+          this.halo(x,y,(2.5+size)*k,fx.color);
+          if(q<.48)this.dot(x,y,2.95,size*k*.64,size*k*.44,'#fff7d9',fx.a);
+          for(let i=0;i<5;i++){
+            const a=fx.a+Math.PI+(i-2)*.54+(noise(fx.seed+i)-.5)*.43;
+            const px=x+Math.cos(a)*travel,py=y+Math.sin(a)*travel;
+            this.dot(px,py,2.88,(.2+.53*k)*size,.075+.06*k,i%2?'#fff3c7':'#ffab62',a);
+          }
+        }
         if(fx.type==='ring') this.circle(x,y,Math.max(.05,fx.size*(1-k*k)),fx.color,.85);
         if(fx.type==='burst') {
           const r=fx.size;
@@ -5313,10 +5699,20 @@ window.Ember = (() => {
           this.halo(x+dx,y+dy,3.2*k,fx.color);
         }
       }
+      for(const w of f.pulses) {
+        if(w.age<=0 || w.r<.05)continue;
+        const x=w.x-cx,y=w.y-cy,r=w.r;
+        this.instance('wavefront',x,y,1.84,r,r,1,0,0,0,w.color);
+        this.instance('wavefront',x,y,1.83,r*.93,r*.93,1,0,0,0,w.chill?'#d6f6ff':w.color);
+        for(let i=0;i<12;i++) {
+          const a=i/12*E.TAU,c=Math.cos(a),s=Math.sin(a);
+          this.line(x+c*(r-.65),y+s*(r-.65),x+c*r,y+s*r,.085,w.color);
+        }
+      }
       for(const w of f.wells) {
         const x=w.x-cx,y=w.y-cy,r=w.r;
-        this.halo(x,y,r*2.3,'#70399a');
-        for(let i=0;i<3;i++) this.circle(x,y,r*(.20+((t*.80+i/3)%1)*.76),'#c187ef');
+        this.halo(x,y,r*2.3,w.chill?'#3c78b0':'#70399a');
+        for(let i=0;i<3;i++) this.circle(x,y,r*(.20+((t*.80+i/3)%1)*.76),w.chill?'#9ce1ff':'#c187ef');
       }
       for(const h of f.hazards) {
         const x=h.x-cx,y=h.y-cy,c=Math.cos(h.a),s=Math.sin(h.a);
@@ -5343,7 +5739,7 @@ window.Ember = (() => {
       }
       this.camera.position.x=this.reduced?0:Math.sin(t*79)*this.shake*.32;
       this.camera.position.y=this.reduced?0:Math.sin(t*93)*this.shake*.22;
-      this.shake*=.88;this.renderer.render(this.scene,this.camera);
+      this.shake*=.78;this.renderer.render(this.scene,this.camera);
     }
   }
   E.SceneView=SceneView;
@@ -5383,24 +5779,38 @@ window.Ember = (() => {
       o.connect(filter);filter.connect(g);g.connect(this.master);o.start(at);o.stop(at+duration+.01);
       o.onended=()=>{o.disconnect();filter.disconnect();g.disconnect();};
     }
-    cue(kind) {
+    cue(kind,detail={}) {
       if(!this.enabled || !this.context) return;
-      const t=this.context.currentTime,limit={gun:.16,kill:.16,gem:.13}[kind]||0;
+      const t=this.context.currentTime,limit={gun:.15,strike:.085,kill:.17,gem:.15,wave:.32,fusionFire:.38}[kind]||0;
       if(t-(this.last[kind]??-5)<limit) return;
       this.last[kind]=t;
-      if(kind==='gun') this.tone(550,.075,'triangle',.048,t,122);
-      if(kind==='kill') {this.tone(97,.19,'sawtooth',.095,t,28,900);this.tone(230,.055,'triangle',.045,t,67);}
+      if(kind==='gun') this.tone(detail.id==='arc'?780:520,.075,'triangle',.052,t,122);
+      if(kind==='strike') {
+        const weight=detail.heft||1;
+        this.tone(880/weight,.038,'square',.055,t,155,1800);
+        this.tone(125,.085,'triangle',.095,t,43);
+      }
+      if(kind==='kill') {this.tone(112,.21,'sawtooth',.117,t,28,850);this.tone(260,.078,'triangle',.078,t,61);}
+      if(kind==='wave' || kind==='fusionFire') {
+        const heavy=detail.tier===3;
+        this.tone(heavy?165:132,heavy?.36:.22,'sine',heavy?.24:.14,t,34);
+        if(heavy)this.tone(392,.24,'triangle',.075,t+.04,780);
+      }
       if(kind==='gem') this.tone(1035,.085,'sine',.045,t,1410);
       if(kind==='hit') this.tone(164,.31,'sawtooth',.19,t,29,1200);
       if(kind==='boost') this.tone(111,.28,'sawtooth',.105,t,684,1400);
       if(kind==='charge' || kind==='warning' || kind==='boss') {
         this.tone(164,.28,'square',.085,t,175,940);this.tone(164,.35,'square',.075,t+.35,175,940);
       }
-      if(kind==='level' || kind==='form' || kind==='evolved' || kind==='bossDown') {
-        const notes=kind==='form'?[261.6,392,523.3,659,784]:[392,493.9,587.3,784];
+      if(kind==='level' || kind==='form' || kind==='evolved' || kind==='fusion' || kind==='bossDown') {
+        const notes=kind==='fusion'?[293.7,440,587.3,740,880,1174.7]:kind==='form'?[261.6,392,523.3,659,784]:[392,493.9,587.3,784];
         notes.forEach((f,i)=>this.tone(f,.25,'triangle',.11,t+i*.062));
       }
       if(kind==='choose' || kind==='repair' || kind==='guard') this.tone(392,.19,'sine',.13,t,784);
+      if(kind==='pickup') {
+        const base=detail.id==='repair'?440:detail.id==='magnet'?659:523;
+        this.tone(base,.14,'sine',.11,t);this.tone(base*1.5,.20,'triangle',.09,t+.09);
+      }
     }
     music(f) {
       if(!this.enabled || !this.context || this.context.state!=='running' || f.mode!=='fly') return;
@@ -5428,12 +5838,13 @@ window.Ember = (() => {
   const E=window.Ember,$=selector=>document.querySelector(selector);
   const home=$('#home'),battle=$('#battle'),field=$('#playfield'),overlay=$('#overlay'),dialog=$('#dialog');
   const keyName='emberwake-flight-v1';
-  let saved={best:0,audio:true};
-  try {const v=JSON.parse(localStorage.getItem(keyName)||'{}');saved.best=Number.isFinite(v.best)?v.best:0;saved.audio=v.audio!==false;} catch {}
+  let saved={best:0,audio:true,target:''};
+  try {const v=JSON.parse(localStorage.getItem(keyName)||'{}');saved.best=Number.isFinite(v.best)?v.best:0;saved.audio=v.audio!==false;saved.target=Object.hasOwn(E.fusions,v.target)?v.target:'';} catch {}
   function save() {try {localStorage.setItem(keyName,JSON.stringify(saved));} catch {}}
   const sound=new E.FlightAudio(saved.audio),keys=new Set();
   let flight=null,view=null,panel='',returnPanel='',guideTab='weapons',routeIndex=0,focusBack=null;
   let pointer=null,lastFrame=0,accumulator=0,lastHud=-1,loadoutKey='',noticeUntil=0,recorded=false,lastDraw=-1;
+  let brakePointer=null,supplyMessage='',supplyUntil=0;
   const radar=$('#radar'),rc=radar.getContext('2d');
   const scoreText=value=>Math.round(value).toString().padStart(7,'0');
   const num=n=>String(n).padStart(2,'0');
@@ -5467,6 +5878,23 @@ window.Ember = (() => {
         for(let i=0;i<4;i++){g.beginPath();g.ellipse(15+i*6,31-i*4,5,12,-.58,0,E.TAU);g.stroke();}path([[5,41],[11,36]]);path([[37,14],[44,8]]);
       } else if(id==='magnet') {
         g.lineWidth=6;g.beginPath();g.arc(25,25,13,0,Math.PI);g.stroke();path([[12,25],[12,10]]);path([[38,25],[38,10]]);
+      } else if(id==='boomerang') {
+        path([[5,38],[16,16],[40,6],[44,8],[24,26],[12,42],[5,38]]);path([[13,32],[23,22],[34,14]]);
+      } else if(id==='sonic' || id==='capacitor') {
+        ring(25,25,4);for(const r of [10,17])for(const side of [0,Math.PI]){g.beginPath();g.arc(25,25,r,side-.88,side+.88);g.stroke();}
+        if(id==='capacitor'){path([[20,6],[30,6]]);path([[20,44],[30,44]]);}
+      } else if(id==='drone') {
+        for(const [x,y] of [[16,30],[32,16]])path([[x-7,y+6],[x,y-9],[x+7,y+6],[x,y+2],[x-7,y+6]]);
+        path([[10,40],[6,45]]);path([[31,27],[27,32]]);
+      } else if(id==='frost') {
+        for(let i=0;i<6;i++){g.save();g.translate(25,25);g.rotate(i*E.TAU/6);path([[0,0],[0,-19]]);path([[-5,-13],[0,-8],[5,-13]]);g.restore();}
+      } else if(id==='vector' || id==='fuel') {
+        for(const y of [14,25,36])path([[10,y+4],[25,y-5],[40,y+4]]);
+      } else if(id==='solar' || id==='storm' || id==='aegis') {
+        path([[25,4],[42,17],[38,34],[25,45],[12,34],[8,17],[25,4]]);
+        if(id==='solar'){ring(25,24,8);path([[25,10],[25,17]]);path([[25,31],[25,37]]);}
+        if(id==='storm')path([[28,12],[18,26],[25,26],[22,36],[33,21],[26,21]],true);
+        if(id==='aegis')path([[25,13],[34,18],[32,28],[25,35],[18,28],[16,18],[25,13]]);
       } else if(id==='repair') {path([[21,8],[29,8],[29,21],[42,21],[42,29],[29,29],[29,42],[21,42],[21,29],[8,29],[8,21],[21,21]],true);}
       else {ring(25,25,16);path([[25,12],[28,21],[38,21],[30,27],[33,37],[25,31],[17,37],[20,27],[12,21],[22,21]],true);}
       g.restore();
@@ -5498,7 +5926,7 @@ window.Ember = (() => {
   function header(code,title,desc='',close=true) {
     return '<div class="dialog-head"><div><div class="panel-kicker">'+code+'</div><h2 id="dialog-title">'+title+'</h2>'+(desc?'<p>'+desc+'</p>':'')+'</div>'+(close?'<button class="close-btn" data-action="back" aria-label="닫기">×</button>':'')+'</div>';
   }
-  function clearInput() {keys.clear();pointer=null;$('#stick').hidden=true;}
+  function clearInput() {keys.clear();pointer=null;brakePointer=null;$('#stick').hidden=true;$('#touch-brake').classList.remove('held');}
   function begin() {
     clearInput();closePanel();home.hidden=true;battle.hidden=false;
     try {
@@ -5511,9 +5939,9 @@ window.Ember = (() => {
       battle.hidden=true;home.hidden=false;
       openPanel('unavailable',header('GRAPHICS SYSTEM','3D 화면을 열 수 없습니다','WebGL 2를 지원하는 브라우저에서 그래픽 가속을 켠 뒤 다시 출격해 주세요.'),'compact');return;
     }
-    flight=new E.Flight();flight.resize(view.halfW,view.halfH);
+    flight=new E.Flight();flight.target=saved.target;flight.resize(view.halfW,view.halfH);
     accumulator=0;lastFrame=0;lastHud=-1;lastDraw=-1;recorded=false;loadoutKey='';sound.unlock();sound.beat=0;sound.nextBeat=0;
-    $('#field-hint').classList.remove('fade');$('#boss-bar').hidden=true;
+    $('#field-hint').classList.remove('fade');$('#boss-bar').hidden=true;supplyMessage='';supplyUntil=0;$('#supply-read').hidden=true;
     notice('SECTOR 01  /  CINDER DOCKS','잿불 조선소','사격 자동 · 녹색 결정으로 레벨업',E.sectors[0].color,3.9);
     updateHud();view.render(flight);
   }
@@ -5538,6 +5966,8 @@ window.Ember = (() => {
   function resume() {if(!flight) return;closePanel();clearInput();flight.resume();lastFrame=0;accumulator=0;sound.unlock();}
   function buildText() {
     return '<b>현재 무장</b> '+Object.entries(flight.weapons).map(([id,n])=>flight.evolved.has(id)?E.weapons[id].evo:E.weapons[id].name+' '+n).join(' · ')+
+      (Object.keys(flight.parts).length?'<br><b>보조 부품</b> '+Object.entries(flight.parts).map(([id,n])=>E.parts[id].name+' '+n).join(' · '):'')+
+      (flight.fusions.size?'<br><b>가동 중인 조합</b> '+[...flight.fusions].map(id=>E.fusions[id].name).join(' · '):'')+
       (flight.form?'<br><b>기체 형식</b> '+E.forms[flight.form].name:'');
   }
   function result(retired=false) {
@@ -5549,27 +5979,49 @@ window.Ember = (() => {
   }
   function choiceCard(c,i) {
     const {id,kind}=c,wp=E.weapons[id],part=E.parts[id],evo=kind==='evo';
-    const d=wp||part||{name:kind==='repair'?'긴급 수리':'전과 보너스',color:'#a8edc8',icon:id};
+    const fusion=E.fusions[id];
+    const d=wp||part||fusion||{name:kind==='repair'?'긴급 수리':'전과 보너스',color:'#a8edc8',icon:id};
     const owned=flight.weapons[id]||flight.parts[id]||0;
-    const type=evo?'무기 진화':kind==='part'?'보조 부품':kind==='weapon'?(owned?'무기 강화':'신규 무장'):'보급';
+    const type=fusion?(fusion.tier===3?'상위 조합':'복합 무장'):evo?'무기 진화':kind==='part'?'보조 부품':kind==='weapon'?(owned?'무기 강화':'신규 무장'):'보급';
     const title=evo?wp.evo:d.name;
-    const text=evo?wp.evolved:kind==='weapon'?(owned?wp.growth:wp.text):kind==='part'?part.text:kind==='repair'?'기체 내구도를 30 회복한다.':'작전 점수 2,000을 획득한다.';
-    const foot=evo?wp.name+' + '+E.parts[wp.part].name:wp?'Lv. '+(owned+1)+' / 5　·　'+E.parts[wp.part].name+' 연계':part?'Lv. '+(owned+1)+' / 3':'즉시 적용';
-    return '<button class="choice" data-choice="'+i+'" style="--c:'+d.color+'"><span class="choice-top">'+type+'<kbd>'+(i+1)+'</kbd></span>'+icon(d.icon,d.color)+'<strong>'+title+'</strong><p>'+text+'</p><em>'+foot+'</em></button>';
+    const text=fusion?fusion.text:evo?wp.evolved:kind==='weapon'?(owned?wp.growth:wp.text):kind==='part'?part.text:kind==='repair'?'기체 내구도를 30 회복한다.':'작전 점수 2,000을 획득한다.';
+    const foot=fusion?fusion.needs.map(recipeName).join(' + '):evo?wp.name+' + '+E.parts[wp.part].name:wp?'Lv. '+(owned+1)+' / 5　·　'+E.parts[wp.part].name+' 연계':part?'Lv. '+(owned+1)+' / 3':'즉시 적용';
+    const path=E.recipePath(flight.fusions.has(flight.target)?'':flight.target);
+    const tracked=path.bases.has(id)||path.combos.has(id)||(part && !owned && [...path.bases].some(key=>E.weapons[key].part===id));
+    return '<button class="choice" data-choice="'+i+'" style="--c:'+d.color+'"><span class="choice-top">'+type+(tracked?' · 목표 경로':'')+'<kbd>'+(i+1)+'</kbd></span>'+icon(d.icon,d.color)+'<strong>'+title+'</strong><p>'+text+'</p><em>'+foot+'</em></button>';
   }
   function draft() {
     clearInput();
-    openPanel('draft',header('LEVEL '+num(flight.level)+'  /  ARMORY','무장을 선택하세요','한 가지를 장착하면 비행을 재개합니다.',false)+
+    const hint=flight.target && !flight.fusions.has(flight.target)?'조합 목표 · '+E.fusions[flight.target].name:'한 가지를 장착하면 비행을 재개합니다.';
+    openPanel('draft',header('LEVEL '+num(flight.level)+'  /  ARMORY','무장을 선택하세요',hint,false)+
       '<div class="card-grid">'+flight.choices.map(choiceCard).join('')+'</div><div class="draft-foot"><button class="outline-btn" data-action="recipes">조합 보기</button><span>숫자키 1–3 선택</span><button class="outline-btn" data-action="reroll" '+(flight.rerolls?'':'disabled')+'>다시 뽑기 · '+flight.rerolls+'</button></div>');
   }
   function select(i) {if(flight?.choose(i)){sound.cue('choose');closePanel();clearInput();lastFrame=0;accumulator=0;lastHud=-1;updateHud();}}
-  const tabs=[['weapons','무기·진화'],['forms','기체 변신'],['enemies','적 도감'],['flight','조작·항로']];
+  const tabs=[['weapons','무기·진화'],['fusions','조합 연구'],['forms','기체 변신'],['enemies','적 도감'],['flight','조작·항로']];
+  function recipeName(id){return E.fusions[id]?.name||E.weapons[id].evo;}
+  function fusionGuide() {
+    const pinned=flight?flight.target:saved.target;
+    const group=tier=>Object.entries(E.fusions).filter(([,recipe])=>recipe.tier===tier).map(([id,r])=>{
+      const active=flight?.fusions.has(id),fits=!flight || flight.canTrack(id);
+      const label=active?'가동 중':pinned===id?'목표 해제':fits?'목표 지정':'슬롯 부족';
+      const components=r.needs.map(key=>{
+        const owned=flight?.fusions.has(key)||flight?.evolved.has(key);
+        return '<span class="'+(owned?'ready':'')+'">'+(owned?'✓ ':'')+recipeName(key)+'</span>';
+      }).join(' + ');
+      return '<article class="guide-item fusion-item" style="--c:'+r.color+'">'+icon(r.icon,r.color)+'<div><strong>'+r.name+'</strong><span class="recipe">'+components+'</span><p>'+r.text+'</p><button data-track="'+id+'" aria-pressed="'+(pinned===id)+'" '+(active||(!fits&&pinned!==id)?'disabled':'')+'>'+label+'</button></div></article>';
+    }).join('');
+    return '<p class="dialog-note">목표를 지정하면 다음 레벨업부터 필요한 무장이나 부품이 우선 등장합니다. 완성한 조합은 기존 무장과 함께 자동으로 발동합니다.</p>'+
+      '<h3 class="guide-section">상위 조합 <small>복합 무장 + 복합 무장</small></h3><div class="guide-grid">'+group(3)+'</div>'+
+      '<h3 class="guide-section">복합 무장 <small>진화 무기 + 진화 무기</small></h3><div class="guide-grid">'+group(2)+'</div>';
+  }
   function guide(tab='weapons',idx=0,origin='') {returnPanel=origin;guideTab=tab;routeIndex=idx;guidePage();}
   function guidePage() {
     let body='';
     if(guideTab==='weapons') {
-      body='<div class="guide-grid">'+Object.entries(E.weapons).map(([id,w])=>'<article class="guide-item" style="--c:'+w.color+'">'+icon(id,w.color)+'<div><strong>'+w.name+'</strong><p>'+w.text+'</p><span class="recipe">Lv.5 + '+E.parts[w.part].name+' → '+w.evo+'</span><p>'+w.evolved+'</p></div></article>').join('')+'</div><p class="dialog-note">무기 4종과 부품 3종까지 장착할 수 있습니다. 무기 Lv.5와 대응 부품 Lv.1 이상을 갖추면 다음 레벨업에 진화 카드가 등장합니다.</p>';
-      body+='<details class="parts-list"><summary>보조 부품 4종</summary>'+Object.values(E.parts).map(v=>'<p><b style="color:'+v.color+'">'+v.name+'</b> '+v.text+'</p>').join('')+'</details>';
+      body='<p class="dialog-note">한 번의 출격에 무기 '+E.WEAPON_SLOTS+'종과 부품 '+E.PART_SLOTS+'종을 장착합니다. 무기 Lv.5와 대응 부품을 모으면 레벨업 때 진화를 선택할 수 있습니다.</p><div class="guide-grid">'+Object.entries(E.weapons).map(([id,w])=>'<article class="guide-item" style="--c:'+w.color+'">'+icon(id,w.color)+'<div><strong>'+w.name+'</strong><p>'+w.text+'</p><span class="recipe">Lv.5 + '+E.parts[w.part].name+' → '+w.evo+'</span><p>'+w.evolved+'</p></div></article>').join('')+'</div>';
+      body+='<details class="parts-list"><summary>보조 부품 '+Object.keys(E.parts).length+'종</summary>'+Object.values(E.parts).map(v=>'<p><b style="color:'+v.color+'">'+v.name+'</b> '+v.text+'</p>').join('')+'</details>';
+    } else if(guideTab==='fusions') {
+      body=fusionGuide();
     } else if(guideTab==='forms') {
       body='<div class="form-grid">'+Object.entries(E.forms).map(([id,s],i)=>'<article class="form-card" style="--c:'+s.color+'">'+specimen(21+i,s.name+' 3D 기체')+'<strong>'+s.name+'</strong><span class="recipe">'+E.weapons[s.base].evo+' + '+E.weapons[s.partner].name+'</span><p>'+s.text+'</p></article>').join('')+'</div><p class="dialog-note">진화 무기와 짝 무기 Lv.1 이상을 함께 보유하면 즉시 변신합니다. 여러 형식을 해금하면 T 키 또는 기체 형식 버튼으로 전환할 수 있습니다.</p>';
     } else if(guideTab==='enemies') {
@@ -5578,6 +6030,8 @@ window.Ember = (() => {
     } else {
       const s=E.sectors[routeIndex];
       body='<dl class="controls-list"><dt>WASD / 방향키</dt><dd>누른 방향으로 기수를 돌립니다. 손을 떼면 그 방향으로 계속 전진합니다.</dd><dt>Q / E</dt><dd>왼쪽 / 오른쪽으로 연속 선회합니다.</dd><dt>마우스 / 터치</dt><dd>마우스는 누른 지점을 향해 비행합니다. 터치는 처음 누른 지점에서 원하는 방향으로 드래그합니다.</dd><dt>Space / 부스트</dt><dd>짧게 가속하며 피격을 회피합니다. 기체 중심의 밝은 점이 피격 기준입니다.</dd><dt>Esc / P · M</dt><dd>비행 일시 정지 · 음향 켜기/끄기</dd></dl><div class="route-choices">'+E.sectors.map((s,i)=>'<button data-sector="'+i+'" class="'+(i===routeIndex?'active':'')+'">'+num(i+1)+' '+s.name+'</button>').join('')+'</div><div class="route-info" style="--art:var(--art-'+s.art+')"><small>'+num((routeIndex+1)*5)+':00　 /　'+s.call+'</small><strong>'+s.boss+'</strong><p>'+s.tactic+'</p></div><p class="dialog-note">보스는 실제 비행 시간 5분·10분·15분에 도착합니다. 세 보스를 모두 격추하면 작전이 끝납니다.</p>';
+      body='<dl class="controls-list"><dt>Shift / 감속 버튼</dt><dd>누르고 있는 동안 속도를 줄이고 더 작은 원으로 선회합니다.</dd></dl>'+body+
+        '<h3 class="guide-section">격추 보급품</h3><div class="supply-guide">'+Object.entries(E.supplies).map(([id,s])=>'<div>'+icon(id,s.color)+'<b>'+s.name+'</b><small>'+s.text+'</small></div>').join('')+'</div>';
     }
     openPanel('guide',header('FLIGHT MANUAL','비행 도감')+'<div class="tabs" role="group" aria-label="도감 분류">'+tabs.map(([id,label])=>'<button class="tab '+(id===guideTab?'active':'')+'" data-tab="'+id+'" aria-pressed="'+(id===guideTab)+'">'+label+'</button>').join('')+'</div>'+body,'wide');
   }
@@ -5592,15 +6046,24 @@ window.Ember = (() => {
   }
   function events() {
     for(const ev of flight.events.splice(0)) {
-      const {kind}=ev;sound.cue(kind);
+      const {kind}=ev;sound.cue(kind,ev);
       if(kind==='level') draft();
       if(kind==='end') result();
       if(kind==='hit') {view.shake=1;const flash=$('#hit-flash');flash.classList.remove('flash');void flash.offsetWidth;flash.classList.add('flash');}
+      if(kind==='strike')view.shake=Math.max(view.shake,Math.min(.38,.12+(ev.heft||1)*.10));
+      if(kind==='kill')view.shake=Math.max(view.shake,.31);
+      if(kind==='fusionFire' && ev.tier===3)view.shake=Math.max(view.shake,.72);
+      if(kind==='pickup'){
+        const s=E.supplies[ev.id];supplyMessage=s.name+' · '+s.text;supplyUntil=flight.elapsed+2.3;
+        $('#supply-read').style.setProperty('--supply',s.color);
+      }
       if(kind==='warning' || kind==='boss') {const s=E.sectors[ev.index];notice(kind==='warning'?'WARNING  /  INTERCEPT':'BOSS CONTACT',kind==='warning'?'대형 신호 접근':s.boss,s.tactic,'#ff8996',kind==='warning'?4:3.5);}
       if(kind==='surge') notice('FORMATION  /  INBOUND','밀집 편대 접근',E.species[ev.id].name+' 대열이 진입합니다.','#ffb77f',2.7);
       if(kind==='resupply' && flight.elapsed>=noticeUntil) notice('SUPPLY','자동 보급','무장 강화 완료 · 내구도 +4 · 점수 +1,000','#8cebc7',1.7);
       if(kind==='bossDown' && flight.mode!=='won') {const s=E.sectors[flight.sector];notice('SECTOR '+num(flight.sector+1)+'  /  '+s.en,s.name,'수호기 격추 · 내구도 26 회복',s.color,4.3);view.shake=1.2;}
       if(kind==='evolved') {const w=E.weapons[ev.id];notice('WEAPON EVOLUTION',w.evo,w.evolved,w.color,4.3);}
+      if(kind==='fusion') {const r=E.fusions[ev.id];notice(r.tier===3?'상위 조합 완성':'복합 무장 완성',r.name,r.text,r.color,4);view.shake=Math.max(view.shake,.85);}
+      if(kind==='routeFull')notice('조합 목표 변경',E.fusions[ev.id].name+' 경로 해제','남은 슬롯에 맞는 목표를 도감에서 고를 수 있습니다.','#ffc382',3);
       if(kind==='form') {const f=E.forms[ev.key];notice('FRAME SHIFT  /  '+f.en,f.name,f.text,f.color,5);view.shake=1.1;}
     }
   }
@@ -5610,11 +6073,18 @@ window.Ember = (() => {
     rc.beginPath();rc.arc(0,0,r,0,E.TAU);rc.fillStyle='#081b21bb';rc.fill();
     rc.strokeStyle='#8ba9ac90';rc.lineWidth=1.6;rc.stroke();rc.strokeStyle='#6c969966';rc.lineWidth=1;
     rc.beginPath();rc.arc(0,0,r*.50,0,E.TAU);rc.moveTo(-r,0);rc.lineTo(r,0);rc.moveTo(0,-r);rc.lineTo(0,r);rc.stroke();
+    let contacts=0;
     for(const e of f.enemies) {
       const dx=e.x-p.x,dy=e.y-p.y,d=Math.hypot(dx,dy);
       if(d>range && !e.boss) continue;
+      contacts++;
       const scale=r/Math.max(d+5,range);
       rc.beginPath();rc.arc(dx*scale,-dy*scale,e.boss?5:2.2,0,E.TAU);rc.fillStyle=e.boss?'#ff6f9f':'#ffae77';rc.fill();
+    }
+    $('#contact-count').textContent=contacts;
+    for(const g of f.gems)if(E.supplies[g.kind] && Math.hypot(g.x-p.x,g.y-p.y)<range){
+      const x=(g.x-p.x)*r/range,y=(p.y-g.y)*r/range;
+      rc.fillStyle=E.supplies[g.kind].color;rc.fillRect(x-3,y-3,6,6);
     }
     rc.rotate(-p.a);rc.beginPath();rc.moveTo(8,0);rc.lineTo(-4,-4);rc.lineTo(-2,0);rc.lineTo(-4,4);rc.closePath();rc.fillStyle='#97fff2';rc.fill();rc.restore();
   }
@@ -5634,23 +6104,27 @@ window.Ember = (() => {
     const formBtn=$('#form-button');formBtn.querySelector('b').textContent=f.form?E.forms[f.form].name:'인터셉터';
     formBtn.disabled=f.forms.length<2;formBtn.title=f.forms.length>1?'기체 전환 (T)':'현재 기체 형식';
     formBtn.classList.toggle('switchable',f.forms.length>1);
-    const k=JSON.stringify(f.weapons)+'/'+Array.from(f.evolved).join();
+    const k=JSON.stringify(f.weapons)+'/'+Array.from(f.evolved).join()+'/'+Array.from(f.fusions).join();
     if(k!==loadoutKey) {
       loadoutKey=k;const ids=Object.keys(f.weapons);
-      $('#loadout').innerHTML=Array.from({length:4},(_,i)=>{
+      $('#loadout').innerHTML=Array.from({length:E.WEAPON_SLOTS},(_,i)=>{
         if(!ids[i]) return '<span class="slot empty" aria-label="빈 무기 슬롯"></span>';
         const id=ids[i],w=E.weapons[id];return '<span class="slot" title="'+(f.evolved.has(id)?w.evo:w.name)+'">'+icon(id,w.color)+'<b>'+(f.evolved.has(id)?'◆':f.weapons[id])+'</b></span>';
-      }).join('');drawIcons($('#loadout'));
+      }).join('')+(f.fusions.size?'<span class="fusion-meter" title="'+[...f.fusions].map(id=>E.fusions[id].name).join(' · ')+'">조합 '+f.fusions.size+'</span>':'');drawIcons($('#loadout'));
     }
     if(!$('#notice').hidden && f.elapsed>=noticeUntil) $('#notice').hidden=true;
     if(f.elapsed>9) $('#field-hint').classList.add('fade');
+    const supply=$('#supply-read'),fuel=p.fuel>0;
+    const message=supplyUntil>f.elapsed?supplyMessage:fuel?'추진 연료 · '+Math.ceil(p.fuel)+'초':'';
+    supply.hidden=!message;
+    if(message && supply.textContent!==message) supply.textContent=message;
     updateRadar();
   }
   function flightInput() {
     const spin=Number(keys.has('KeyQ'))-Number(keys.has('KeyE'));
     const x=Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'));
     const y=Number(keys.has('KeyW')||keys.has('ArrowUp'))-Number(keys.has('KeyS')||keys.has('ArrowDown'));
-    return {spin,angle:x||y?Math.atan2(y,x):pointer?.angle};
+    return {spin,angle:x||y?Math.atan2(y,x):pointer?.angle,brake:brakePointer!==null||keys.has('ShiftLeft')||keys.has('ShiftRight')};
   }
   function frame(now) {
     if(!flight) {lastFrame=0;return;}
@@ -5705,10 +6179,26 @@ window.Ember = (() => {
   document.addEventListener('fullscreenchange',()=>{for(const b of document.querySelectorAll('.fullscreen')) b.setAttribute('aria-label',document.fullscreenElement?'전체 화면 종료':'전체 화면');});
   $('#pause').addEventListener('click',pause);$('#boost-read').addEventListener('click',()=>flight?.boost());
   $('#touch-boost').addEventListener('click',()=>flight?.boost());$('#form-button').addEventListener('click',()=>flight?.cycleForm());
+  const brakeButton=$('#touch-brake');
+  brakeButton.addEventListener('pointerdown',event=>{
+    if(flight?.mode!=='fly')return;
+    event.preventDefault();brakePointer=event.pointerId;brakeButton.setPointerCapture(event.pointerId);brakeButton.classList.add('held');
+  });
+  for(const type of ['pointerup','pointercancel','lostpointercapture'])brakeButton.addEventListener(type,event=>{
+    if(brakePointer===event.pointerId){brakePointer=null;brakeButton.classList.remove('held');}
+  });
   dialog.addEventListener('click',event=>{
     const b=event.target.closest('button');if(!b) return;
     if(b.dataset.choice!==undefined) {select(Number(b.dataset.choice));return;}
     if(b.dataset.tab) {guideTab=b.dataset.tab;guidePage();dialog.querySelector('[data-tab="'+guideTab+'"]').focus();return;}
+    if(b.dataset.track){
+      const id=b.dataset.track,current=flight?flight.target:saved.target;
+      const target=current===id?'':id;
+      if(flight && target && !flight.canTrack(target))return;
+      if(flight)flight.target=target;
+      saved.target=target;save();
+      const scroll=dialog.scrollTop;guidePage();dialog.scrollTop=scroll;dialog.querySelector('[data-track="'+id+'"]').focus({preventScroll:true});return;
+    }
     if(b.dataset.sector!==undefined) {routeIndex=Number(b.dataset.sector);guidePage();dialog.querySelector('[data-sector="'+routeIndex+'"]').focus();return;}
     switch(b.dataset.action) {
       case 'back': back();break;
@@ -5716,7 +6206,7 @@ window.Ember = (() => {
       case 'start':begin();break;
       case 'home':homeScreen();break;
       case 'guide':guide('weapons',0,'pause');break;
-      case 'recipes':guide('weapons',0,'draft');break;
+      case 'recipes':guide('fusions',0,'draft');break;
       case 'switch':flight.setForm(flight.forms[(flight.forms.indexOf(flight.form)+1)%flight.forms.length]);updateHud();pausePanel();break;
       case 'reroll':if(flight.reroll()){sound.cue('choose');draft();}break;
       case 'retire':openPanel('confirm',header('RETURN TO BASE','이번 비행을 마칠까요?','현재 점수를 기록하고 기지로 귀환합니다.',false)+'<div class="dialog-actions"><button class="primary-btn" data-action="resume">비행 재개</button><button class="outline-btn" data-action="finish">귀환 확정</button></div>','compact');break;
@@ -5743,7 +6233,7 @@ window.Ember = (() => {
     if(['Escape','KeyP'].includes(code) && !e.repeat){e.preventDefault();pause();return;}
     if(code==='Space'){e.preventDefault();if(!e.repeat) flight.boost();return;}
     if(code==='KeyT' && !e.repeat){flight.cycleForm();return;}
-    if(['KeyA','KeyD','KeyW','KeyS','KeyQ','KeyE','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(code)){e.preventDefault();keys.add(code);}
+    if(['KeyA','KeyD','KeyW','KeyS','KeyQ','KeyE','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','ShiftLeft','ShiftRight'].includes(code)){e.preventDefault();keys.add(code);}
   });
   document.addEventListener('keyup',e=>keys.delete(e.code));
   window.addEventListener('resize',resize);new ResizeObserver(resize).observe(field);
